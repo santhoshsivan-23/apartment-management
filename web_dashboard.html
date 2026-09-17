@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AMS Local — Apartment Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+    .nav-active {
+      background-color: #0f766e !important;
+      color: #a3faef !important;
+      font-weight: 600 !important;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container": "#eaedff",
+            "outline-variant": "#bdc9c6",
+            "on-tertiary": "#ffffff",
+            "primary-fixed": "#9cf2e8",
+            "error": "#ba1a1a",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#a15600",
+            "on-surface": "#131b2e",
+            "on-surface-variant": "#3e4947",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#80d5cb",
+            "surface-bright": "#faf8ff",
+            "on-secondary-container": "#006f66",
+            "on-secondary-fixed-variant": "#005049",
+            "tertiary-fixed-dim": "#ffb77d",
+            "surface-tint": "#006a63",
+            "inverse-on-surface": "#eef0ff",
+            "on-tertiary-fixed": "#2f1500",
+            "inverse-primary": "#80d5cb",
+            "surface-variant": "#dae2fd",
+            "on-tertiary-fixed-variant": "#6e3900",
+            "on-primary-fixed-variant": "#00504a",
+            "on-primary-container": "#a3faef",
+            "primary": "#005c55",
+            "outline": "#6e7977",
+            "tertiary": "#7d4200",
+            "on-error-container": "#93000a",
+            "on-background": "#131b2e",
+            "tertiary-fixed": "#ffdcc3",
+            "error-container": "#ffdad6",
+            "primary-container": "#0f766e",
+            "secondary-fixed": "#89f5e7",
+            "on-tertiary-container": "#ffe6d5",
+            "secondary-fixed-dim": "#6bd8cb",
+            "inverse-surface": "#283044",
+            "surface-dim": "#d2d9f4",
+            "on-primary-fixed": "#00201d",
+            "surface": "#faf8ff",
+            "on-secondary-fixed": "#00201d",
+            "secondary": "#006a61",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f2f3ff",
+            "surface-container-highest": "#dae2fd",
+            "surface-container-high": "#e2e7ff",
+            "background": "#faf8ff",
+            "secondary-container": "#86f2e4"
+          },
+          fontFamily: {
+            "label-currency-lg": ["JetBrains Mono"],
+            "label-numeric": ["JetBrains Mono"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-caption": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "label-badge": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"]
+          },
+          spacing: {
+            "margin": "1rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.25rem",
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-xl": "1.75rem",
+            "space-md": "1rem"
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased">
+
+  <!-- FIXED SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="flex flex-col">
+      <div class="px-space-lg pt-space-lg pb-space-md">
+        <div class="flex items-center gap-space-sm">
+          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-primary text-[22px]">apartment</span>
+          </div>
+          <div class="flex flex-col overflow-hidden">
+            <span class="font-headline-sm text-headline-sm text-on-surface truncate tracking-tight font-bold">AMS Local</span>
+            <span class="font-label-caption text-label-caption text-on-surface-variant font-medium">Local SQLite v3.42</span>
+          </div>
+        </div>
+        <div class="mt-space-md px-space-sm py-space-xs bg-surface-container-lowest rounded-full flex items-center gap-2 shadow-[0_1px_3px_rgba(15,23,42,0.04)]">
+          <span class="w-2 h-2 rounded-full bg-primary shrink-0 animate-pulse"></span>
+          <span class="font-label-badge text-label-badge text-on-surface truncate">100% Offline • Encrypted DB</span>
+        </div>
+      </div>
+
+      <!-- MAIN NAVIGATION LINKS -->
+      <nav class="px-space-md flex flex-col gap-space-xs mt-space-sm" id="sidebar-nav">
+        <a class="nav-item flex items-center gap-space-sm px-space-md py-space-sm rounded-xl transition-all nav-active cursor-pointer" data-target="view-dashboard">
+          <span class="material-symbols-outlined text-[20px]">grid_view</span>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all cursor-pointer" data-target="view-modules">
+          <span class="material-symbols-outlined text-[20px]">apps</span>
+          <span>26-Modules Directory</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all cursor-pointer" data-target="view-maintenance">
+          <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+          <span>Maintenance &amp; Invoices</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all cursor-pointer" data-target="view-reports">
+          <span class="material-symbols-outlined text-[20px]">monitoring</span>
+          <span>Financial Reports</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all cursor-pointer" onclick="switchView('view-reports'); document.getElementById('backupRecordsBody')?.scrollIntoView({behavior: 'smooth'})">
+          <span class="material-symbols-outlined text-[20px]">settings_backup_restore</span>
+          <span>Backup &amp; Restore</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all cursor-pointer" onclick="switchView('view-modules'); filterCategory('admin')">
+          <span class="material-symbols-outlined text-[20px]">tune</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- NODE STATUS FOOTER -->
+    <div class="p-space-md m-space-md bg-surface-container-lowest rounded-xl flex flex-col gap-space-xs shadow-[0_1px_3px_rgba(15,23,42,0.04)]">
+      <div class="flex items-center justify-between">
+        <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Node Status</span>
+        <span class="flex items-center gap-1 font-label-caption text-label-caption text-primary font-bold">
+          <span class="material-symbols-outlined text-[14px]">lock</span>SECURED
+        </span>
+      </div>
+      <div class="flex items-center justify-between text-on-surface font-label-numeric text-label-numeric font-semibold">
+        <span>WAL Commits</span>
+        <span>#14,892</span>
+      </div>
+      <div class="flex items-center justify-between text-on-surface-variant font-label-caption text-label-caption">
+        <span>RAM Usage</span>
+        <span>42.8 MB</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="pl-72 flex flex-col min-h-screen">
+    
+    <!-- TOP HEADER BAR -->
+    <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+      <div class="flex items-center gap-space-md">
+        <div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-1.5 rounded-xl">
+          <span class="material-symbols-outlined text-on-surface-variant text-[18px]">dns</span>
+          <span class="font-label-numeric text-label-numeric text-on-surface font-semibold">apartment_management.db</span>
+          <span class="font-label-caption text-label-caption text-on-surface-variant">(1.4 MB)</span>
+        </div>
+        <div class="hidden xl:flex items-center gap-2 px-space-sm py-1 bg-surface-container-high rounded-lg text-on-surface-variant font-label-caption text-label-caption">
+          <span class="material-symbols-outlined text-[14px] text-primary">bolt</span>
+          <span>Zero Network Latency • SQLite Engine</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-space-md">
+        <div class="flex items-center gap-space-sm">
+          <button class="h-9 px-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface flex items-center gap-1.5 font-body-sm text-body-sm transition-colors" onclick="alert('Terminal locked. Enter 4-digit Master PIN to resume.')">
+            <span class="material-symbols-outlined text-[16px]">lock</span>
+            <span>Lock Terminal</span>
+          </button>
+          <button class="h-9 px-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface flex items-center gap-1.5 font-body-sm text-body-sm transition-colors" onclick="location.reload()">
+            <span class="material-symbols-outlined text-[16px]">sync</span>
+            <span>Sync Ledger</span>
+          </button>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold font-body-sm">
+          A
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <main class="w-full pt-16 px-space-xl pb-space-xl bg-surface flex-1">
+
+      <!-- ========================================================= -->
+      <!-- VIEW 1: DASHBOARD OVERVIEW                                -->
+      <!-- ========================================================= -->
+      <section id="view-dashboard" class="view-panel flex flex-col w-full gap-space-lg">
+        
+        <!-- TOP ADMIN BANNER -->
+        <div class="w-full bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+          <div class="flex items-center gap-space-md">
+            <div class="w-14 h-14 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 shadow-sm">
+              <span class="material-symbols-outlined text-[28px]">shield_person</span>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <span class="font-headline-md text-headline-md text-on-surface font-bold">Welcome back, Administrator</span>
+                <span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-badge text-label-badge uppercase tracking-wider font-semibold">Local Master</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-x-space-md gap-y-1 font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary shrink-0"></span>SQLite v3.42.0 Standalone</span>
+                <span class="text-outline-variant">•</span>
+                <span>48 Units Configured</span>
+                <span class="text-outline-variant">•</span>
+                <span>112 Registered Residents</span>
+                <span class="text-outline-variant">•</span>
+                <span class="text-primary font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">wifi_off</span>Air-Gapped / Privacy First</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-space-sm self-start xl:self-center">
+            <button class="h-10 px-space-md bg-surface-container-lowest text-on-surface hover:bg-surface-container-high rounded-lg shadow-sm flex items-center gap-2 font-body-sm text-body-sm transition-all" onclick="alert('SQLite PRAGMA vacuum executed successfully.')">
+              <span class="material-symbols-outlined text-[18px] text-primary">data_thresholding</span>
+              <span>VACUUM DB</span>
+            </button>
+            <button class="h-10 px-space-md bg-primary text-on-primary hover:bg-primary-container rounded-lg shadow-sm flex items-center gap-2 font-body-sm text-body-sm font-semibold transition-all" onclick="location.reload()">
+              <span class="material-symbols-outlined text-[18px]">cached</span>
+              <span>Refresh Node</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6-CARD KPI GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-space-md">
+          <!-- 1. Apartments -->
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-start justify-between">
+              <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Apartments</span>
+              <span class="p-1.5 rounded-lg bg-surface-container-high text-primary"><span class="material-symbols-outlined text-[18px]">apartment</span></span>
+            </div>
+            <div class="my-2">
+              <div class="flex items-baseline gap-2">
+                <span class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold">48</span>
+                <span class="font-label-caption text-label-caption text-primary font-bold">98% Occ.</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">2 Flats Vacant (A-104, C-302)</p>
+            </div>
+            <div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+              <div class="bg-primary h-full rounded-full" style="width: 95.8%"></div>
+            </div>
+          </div>
+
+          <!-- 2. Residents -->
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-start justify-between">
+              <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Residents</span>
+              <span class="p-1.5 rounded-lg bg-surface-container-high text-secondary"><span class="material-symbols-outlined text-[18px]">group</span></span>
+            </div>
+            <div class="my-2">
+              <div class="flex items-baseline gap-2">
+                <span class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold">112</span>
+                <span class="px-1.5 py-0.2 rounded bg-surface-container text-primary font-label-caption text-label-caption font-semibold">+4 this mo</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">78 Owners • 34 Tenants</p>
+            </div>
+            <div class="flex items-center gap-1 text-on-surface-variant font-label-caption text-label-caption">
+              <span class="w-2 h-2 rounded-full bg-primary shrink-0"></span>
+              <span>100% Kyc Local-Indexed</span>
+            </div>
+          </div>
+
+          <!-- 3. Pending Dues -->
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-start justify-between">
+              <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Pending Dues</span>
+              <span class="p-1.5 rounded-lg bg-error-container text-error"><span class="material-symbols-outlined text-[18px]">pending_actions</span></span>
+            </div>
+            <div class="my-2">
+              <div class="flex items-baseline gap-1">
+                <span class="font-label-numeric text-label-numeric text-error font-bold">14 Flats</span>
+                <span class="font-label-caption text-label-caption text-on-surface-variant">(Rs. 35K)</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-error mt-0.5 font-medium">5 days until late fine</p>
+            </div>
+            <span class="px-2 py-0.5 rounded-md bg-error-container text-on-error-container font-label-caption text-label-caption text-center font-semibold">Due Oct 15</span>
+          </div>
+
+          <!-- 4. Recovery -->
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-start justify-between">
+              <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">October Recovery</span>
+              <span class="p-1.5 rounded-lg bg-secondary-container text-on-secondary-container"><span class="material-symbols-outlined text-[18px]">payments</span></span>
+            </div>
+            <div class="my-2">
+              <div class="flex items-baseline gap-1">
+                <span class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold">Rs. 85K</span>
+                <span class="font-label-caption text-label-caption text-on-surface-variant">/ 1.20L</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">71% Collected</p>
+            </div>
+            <div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+              <div class="bg-secondary h-full rounded-full" style="width: 71%"></div>
+            </div>
+          </div>
+
+          <!-- 5. Complaints -->
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-start justify-between">
+              <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Helpdesk</span>
+              <span class="p-1.5 rounded-lg bg-surface-container-high text-tertiary"><span class="material-symbols-outlined text-[18px]">report_problem</span></span>
+            </div>
+            <div class="my-2">
+              <div class="flex items-baseline gap-2">
+                <span class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold">3</span>
+                <span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-label-badge text-label-badge font-bold">1 Urgent</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate">Water Leakage • Lift #2</p>
+            </div>
+            <span class="font-label-caption text-label-caption text-on-surface-variant">Avg. resolution: 4.2 hrs</span>
+          </div>
+
+          <!-- 6. Bookings -->
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-start justify-between">
+              <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Bookings</span>
+              <span class="p-1.5 rounded-lg bg-surface-container-high text-primary"><span class="material-symbols-outlined text-[18px]">event_available</span></span>
+            </div>
+            <div class="my-2">
+              <div class="flex items-baseline gap-2">
+                <span class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold">2</span>
+                <span class="font-label-caption text-label-caption text-primary font-bold">This Wk</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate">Clubhouse (24th) • Pool (28th)</p>
+            </div>
+            <div class="font-label-caption text-label-caption text-on-surface-variant flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+              <span>Deposit Cleared</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-COLUMN MAIN CONTENT (70% - 30%) -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+          
+          <!-- LEFT 8 COLS -->
+          <div class="xl:col-span-8 flex flex-col gap-space-lg min-w-0">
+            
+            <!-- QUICK DISPATCH ACTION BAR -->
+            <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Quick Operations &amp; Dispatch</h2>
+                </div>
+                <span class="font-label-caption text-label-caption text-on-surface-variant">Immediate Local SQLite Write Operations</span>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-space-sm">
+                <button class="h-20 bg-surface-container-low hover:bg-surface-container p-space-sm rounded-xl flex flex-col items-center justify-center gap-1 text-on-surface transition-all text-center group" onclick="openModal('batchBillModal')">
+                  <span class="material-symbols-outlined text-[24px] text-primary group-hover:scale-110 transition-transform">receipt_long</span>
+                  <span class="font-body-sm text-body-sm font-semibold leading-tight">Batch Billing</span>
+                </button>
+                <button class="h-20 bg-surface-container-low hover:bg-surface-container p-space-sm rounded-xl flex flex-col items-center justify-center gap-1 text-on-surface transition-all text-center group" onclick="openModal('onboardModal')">
+                  <span class="material-symbols-outlined text-[24px] text-primary group-hover:scale-110 transition-transform">person_add</span>
+                  <span class="font-body-sm text-body-sm font-semibold leading-tight">Add Resident</span>
+                </button>
+                <button class="h-20 bg-surface-container-low hover:bg-surface-container p-space-sm rounded-xl flex flex-col items-center justify-center gap-1 text-on-surface transition-all text-center group" onclick="openModal('gateVisitorModal')">
+                  <span class="material-symbols-outlined text-[24px] text-secondary group-hover:scale-110 transition-transform">badge</span>
+                  <span class="font-body-sm text-body-sm font-semibold leading-tight">Gate Entry</span>
+                </button>
+                <button class="h-20 bg-surface-container-low hover:bg-surface-container p-space-sm rounded-xl flex flex-col items-center justify-center gap-1 text-on-surface transition-all text-center group" onclick="openModal('offlinePayModal')">
+                  <span class="material-symbols-outlined text-[24px] text-primary group-hover:scale-110 transition-transform">price_check</span>
+                  <span class="font-body-sm text-body-sm font-semibold leading-tight">Log Payment</span>
+                </button>
+                <button class="h-20 bg-surface-container-low hover:bg-surface-container p-space-sm rounded-xl flex flex-col items-center justify-center gap-1 text-on-surface transition-all text-center group col-span-2 sm:col-span-1" onclick="openModal('noticeModal')">
+                  <span class="material-symbols-outlined text-[24px] text-tertiary group-hover:scale-110 transition-transform">campaign</span>
+                  <span class="font-body-sm text-body-sm font-semibold leading-tight">Broadcast</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- GATE STREAM TABLE -->
+            <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Gate &amp; Security Live Stream</h2>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Real-time gatekeeper SQLite local log • Main North Gate</p>
+                </div>
+              </div>
+
+              <div class="overflow-x-auto w-full">
+                <table class="w-full text-left font-body-sm text-body-sm border-separate border-spacing-y-2">
+                  <thead>
+                    <tr class="text-on-surface-variant font-label-caption text-label-caption uppercase tracking-wider px-space-sm">
+                      <th class="py-2 px-3">Visitor / Service</th>
+                      <th class="py-2 px-3">Purpose</th>
+                      <th class="py-2 px-3">Flat &amp; Host</th>
+                      <th class="py-2 px-3">Vehicle</th>
+                      <th class="py-2 px-3">Checked In</th>
+                      <th class="py-2 px-3 text-right">Gate Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="visitorTableBody">
+                    <tr class="bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl overflow-hidden">
+                      <td class="py-3 px-3 rounded-l-xl">
+                        <div class="flex items-center gap-3">
+                          <div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">R</div>
+                          <div class="flex flex-col">
+                            <span class="font-body-md text-body-md font-semibold text-on-surface">Rajesh Sharma</span>
+                            <span class="font-label-caption text-label-caption text-on-surface-variant">Amazon Delivery</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-badge text-label-badge font-semibold">Package Drop</span>
+                      </td>
+                      <td class="py-3 px-3">
+                        <div class="flex flex-col">
+                          <span class="font-label-numeric text-label-numeric font-bold text-on-surface">Flat B-402</span>
+                          <span class="font-label-caption text-label-caption text-on-surface-variant">Dr. Mehta</span>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="font-label-numeric text-label-numeric bg-surface-container-highest px-2 py-0.5 rounded text-on-surface font-semibold">KA-03-MG-4122</span>
+                      </td>
+                      <td class="py-3 px-3 text-on-surface-variant font-label-numeric text-label-numeric">10:42 AM</td>
+                      <td class="py-3 px-3 rounded-r-xl text-right">
+                        <button class="h-8 px-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-badge text-label-badge inline-flex items-center gap-1" onclick="markExit(this)">
+                          <span class="material-symbols-outlined text-[14px]">logout</span>
+                          <span>Mark Exit</span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl overflow-hidden">
+                      <td class="py-3 px-3 rounded-l-xl">
+                        <div class="flex items-center gap-3">
+                          <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">S</div>
+                          <div class="flex flex-col">
+                            <span class="font-body-md text-body-md font-semibold text-on-surface">Suresh Kumar</span>
+                            <span class="font-label-caption text-label-caption text-on-surface-variant">Urban Company (Plumber)</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface font-label-badge text-label-badge font-semibold">Sanitary Repair</span>
+                      </td>
+                      <td class="py-3 px-3">
+                        <div class="flex flex-col">
+                          <span class="font-label-numeric text-label-numeric font-bold text-on-surface">Flat A-102</span>
+                          <span class="font-label-caption text-label-caption text-on-surface-variant">S. Balakrishnan</span>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="font-label-numeric text-label-numeric bg-surface-container-highest px-2 py-0.5 rounded text-on-surface font-semibold">KA-51-EF-9018</span>
+                      </td>
+                      <td class="py-3 px-3 text-on-surface-variant font-label-numeric text-label-numeric">10:15 AM</td>
+                      <td class="py-3 px-3 rounded-r-xl text-right">
+                        <button class="h-8 px-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-badge text-label-badge inline-flex items-center gap-1" onclick="markExit(this)">
+                          <span class="material-symbols-outlined text-[14px]">logout</span>
+                          <span>Mark Exit</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT 4 COLS -->
+          <div class="xl:col-span-4 flex flex-col gap-space-lg">
+            
+            <!-- DONUT PROGRESS CHART -->
+            <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+              <div class="flex items-center justify-between">
+                <div class="flex flex-col">
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Monthly Recovery</h2>
+                  <span class="font-label-caption text-label-caption text-on-surface-variant">October 2026 Cycle</span>
+                </div>
+                <span class="p-2 rounded-xl bg-secondary-container text-on-secondary-container">
+                  <span class="material-symbols-outlined text-[20px]">donut_large</span>
+                </span>
+              </div>
+              <div class="flex items-center justify-center py-2 relative">
+                <svg class="w-40 h-40 transform -rotate-90" viewBox="0 0 120 120">
+                  <circle class="text-surface-container" cx="60" cy="60" fill="transparent" r="50" stroke="currentColor" stroke-width="12"></circle>
+                  <circle class="text-primary" cx="60" cy="60" fill="transparent" r="50" stroke="currentColor" stroke-dasharray="314.159" stroke-dashoffset="91.1" stroke-linecap="round" stroke-width="12"></circle>
+                </svg>
+                <div class="absolute flex flex-col items-center justify-center text-center pointer-events-none">
+                  <span class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold leading-none">71%</span>
+                  <span class="font-label-caption text-label-caption text-on-surface-variant mt-1 uppercase tracking-wider font-semibold">Collected</span>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2 font-body-sm text-body-sm">
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low">
+                  <span class="text-on-surface font-medium">Received via Cash/UPI</span>
+                  <span class="font-label-numeric text-label-numeric font-bold text-on-surface">Rs. 85,000</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low">
+                  <span class="text-on-surface font-medium">Pending Dues (14 Flats)</span>
+                  <span class="font-label-numeric text-label-numeric font-bold text-error">Rs. 35,000</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- BACKUP STATUS -->
+            <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[20px]">save</span>
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Offline Backup Node</h2>
+                </div>
+                <span class="font-label-caption text-label-caption text-primary font-bold">READY</span>
+              </div>
+              <div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-space-sm text-body-sm">
+                <div class="flex items-center justify-between">
+                  <span class="font-label-caption text-label-caption text-on-surface-variant uppercase">Last Backup Point:</span>
+                  <span class="font-label-numeric text-label-numeric text-on-surface font-semibold" id="dashBackupTime">Today, 11:00 AM</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="font-label-caption text-label-caption text-on-surface-variant uppercase">Integrity:</span>
+                  <span class="font-label-caption text-label-caption text-primary font-bold">SHA-256 Verified</span>
+                </div>
+              </div>
+              <button class="w-full h-10 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-semibold flex items-center justify-center gap-2 transition-all" onclick="alert('Instant SQLite snapshot saved locally to backups/ folder.')">
+                <span class="material-symbols-outlined text-[18px]">download_for_offline</span>
+                <span>Create Instant Snapshot</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- VIEW 2: MAINTENANCE BILLING & INVOICES                     -->
+      <!-- ========================================================= -->
+      <section id="view-maintenance" class="view-panel hidden flex flex-col w-full gap-space-lg">
+        
+        <!-- TOP TITLE & BUTTONS -->
+        <div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md">
+          <div class="flex flex-col">
+            <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold">Maintenance Billing Hub</h1>
+            <p class="font-body-md text-body-md text-on-surface-variant">October 2026 Assessment Cycle • 48 Units Configured</p>
+          </div>
+          <div class="flex items-center gap-space-sm">
+            <button class="h-10 px-space-md rounded-xl bg-primary text-on-primary font-body-md text-body-md font-semibold flex items-center gap-2 shadow-sm hover:bg-primary-container transition-all" onclick="openModal('batchBillModal')">
+              <span class="material-symbols-outlined text-[18px]">post_add</span>
+              <span>+ Generate Batch Bills (48 Flats)</span>
+            </button>
+            <button class="h-10 px-space-md rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md text-body-md flex items-center gap-2 transition-all" onclick="window.print()">
+              <span class="material-symbols-outlined text-[18px]">print</span>
+              <span>Print All (48)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 SUMMARY CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+          <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+            <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Total Billed</span>
+            <div class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold mt-1">₹1,20,000</div>
+            <div class="w-full bg-surface-container-high h-1.5 rounded-full mt-2 overflow-hidden">
+              <div class="bg-primary h-full rounded-full w-full"></div>
+            </div>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+            <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Total Collected</span>
+            <div class="font-label-currency-lg text-label-currency-lg text-secondary font-bold mt-1">₹85,000</div>
+            <div class="w-full bg-surface-container-high h-1.5 rounded-full mt-2 overflow-hidden">
+              <div class="bg-secondary h-full rounded-full" style="width: 71%"></div>
+            </div>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+            <span class="font-label-caption text-label-caption text-error uppercase tracking-wider font-semibold">Pending Dues</span>
+            <div class="font-label-currency-lg text-label-currency-lg text-error font-bold mt-1">₹35,000</div>
+            <div class="w-full bg-surface-container-high h-1.5 rounded-full mt-2 overflow-hidden">
+              <div class="bg-error h-full rounded-full" style="width: 29%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-PANE WORKSPACE -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+          
+          <!-- LEFT 8 COLS: TABLE -->
+          <div class="lg:col-span-8 flex flex-col gap-space-md">
+            <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+              <div class="p-space-md flex items-center justify-between border-b border-outline-variant/20">
+                <div class="flex items-center gap-2">
+                  <button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold">All Invoices (48)</button>
+                  <button class="px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm font-medium">Unpaid (14)</button>
+                  <button class="px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm font-medium">Paid (34)</button>
+                </div>
+                <input class="h-9 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none" placeholder="Search flat..." type="text"/>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full text-left font-body-sm text-body-sm">
+                  <thead>
+                    <tr class="bg-surface-container-low text-on-surface-variant font-label-caption text-label-caption uppercase tracking-wider">
+                      <th class="py-3 px-space-md">Flat &amp; Tower</th>
+                      <th class="py-3 px-space-md">Resident</th>
+                      <th class="py-3 px-space-md">Timeline</th>
+                      <th class="py-3 px-space-md text-right">Amount</th>
+                      <th class="py-3 px-space-md text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="cursor-pointer bg-primary-fixed/20 hover:bg-primary-fixed/30 border-b border-outline-variant/10">
+                      <td class="py-3 px-space-md font-bold text-on-surface">Flat A-101 (Tower A)</td>
+                      <td class="py-3 px-space-md">John Doe (Owner)</td>
+                      <td class="py-3 px-space-md text-error font-semibold">Due: Oct 15</td>
+                      <td class="py-3 px-space-md text-right font-label-numeric font-bold">₹3,100</td>
+                      <td class="py-3 px-space-md text-center">
+                        <span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-badge font-bold">UNPAID</span>
+                      </td>
+                    </tr>
+                    <tr class="cursor-pointer hover:bg-surface-container-low border-b border-outline-variant/10">
+                      <td class="py-3 px-space-md font-bold text-on-surface">Flat A-102 (Tower A)</td>
+                      <td class="py-3 px-space-md">Sarah Jenkins (Tenant)</td>
+                      <td class="py-3 px-space-md text-secondary font-semibold">Paid on: Oct 03</td>
+                      <td class="py-3 px-space-md text-right font-label-numeric font-bold">₹2,500</td>
+                      <td class="py-3 px-space-md text-center">
+                        <span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-badge font-bold">PAID</span>
+                      </td>
+                    </tr>
+                    <tr class="cursor-pointer hover:bg-surface-container-low border-b border-outline-variant/10">
+                      <td class="py-3 px-space-md font-bold text-on-surface">Flat B-204 (Block B)</td>
+                      <td class="py-3 px-space-md">Vikram Sharma (Owner)</td>
+                      <td class="py-3 px-space-md text-error font-semibold">Due: Oct 15</td>
+                      <td class="py-3 px-space-md text-right font-label-numeric font-bold">₹2,800</td>
+                      <td class="py-3 px-space-md text-center">
+                        <span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-badge font-bold">UNPAID</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT 4 COLS: INSPECTOR -->
+          <div class="lg:col-span-4 flex flex-col gap-space-md">
+            <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+              <div class="flex items-center justify-between">
+                <span class="font-label-numeric text-label-numeric text-on-surface-variant font-bold">BILL #104</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-badge font-bold">UNPAID</span>
+              </div>
+              <div class="bg-surface-container-low p-space-md rounded-xl">
+                <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Flat A-101 (Tower A)</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">John Doe • +91 98765 43210</p>
+              </div>
+              <div class="flex flex-col gap-2">
+                <span class="font-label-caption text-label-caption text-on-surface-variant uppercase font-semibold">Line Items Breakdown</span>
+                <div class="p-space-sm bg-surface-container-low rounded-xl flex flex-col gap-2 text-body-sm">
+                  <div class="flex items-center justify-between">
+                    <span>Base Maintenance</span>
+                    <span class="font-label-numeric">₹2,500</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span>Clubhouse Event Charge</span>
+                    <span class="font-label-numeric">₹400</span>
+                  </div>
+                  <div class="flex items-center justify-between text-error font-semibold">
+                    <span>Late Fine (Prev Cycle)</span>
+                    <span class="font-label-numeric">₹200</span>
+                  </div>
+                  <div class="border-t border-outline-variant/30 pt-2 flex items-center justify-between font-bold text-on-surface">
+                    <span>Total Due</span>
+                    <span class="font-label-currency-lg text-error">₹3,100</span>
+                  </div>
+                </div>
+              </div>
+              <button class="w-full h-11 rounded-xl bg-primary text-on-primary font-body-md font-semibold flex items-center justify-center gap-2 hover:bg-primary-container transition-all" onclick="openModal('offlinePayModal')">
+                <span class="material-symbols-outlined text-[20px]">add_card</span>
+                <span>Record Offline Payment</span>
+              </button>
+              <button class="w-full h-10 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-body-sm font-semibold flex items-center justify-center gap-1.5 transition-colors" onclick="window.print()">
+                <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                <span>Print PDF Invoice</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- VIEW 3: FINANCIAL REPORTS & SQLITE SAFEGUARD               -->
+      <!-- ========================================================= -->
+      <section id="view-reports" class="view-panel hidden flex flex-col w-full gap-space-lg">
+        
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-xs">
+          <div class="flex flex-col gap-1">
+            <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Financial Analytics &amp; SQLite Safeguard</h1>
+            <p class="font-body-md text-body-md text-on-surface-variant">Local physical storage ledger, automated monthly balances, and cryptographic raw snapshots.</p>
+          </div>
+          <button class="h-10 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center gap-2 font-body-sm text-body-sm shadow-sm transition-all" onclick="window.print()">
+            <span class="material-symbols-outlined text-[18px]">print</span>
+            <span>Print Ledger</span>
+          </button>
+        </div>
+
+        <!-- 4 CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+            <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Total Collected YTD</span>
+            <div class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold mt-2">₹14,25,000</div>
+            <span class="text-primary font-label-caption font-semibold mt-1 block">+12.4% vs previous FY</span>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+            <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Outstanding Dues</span>
+            <div class="font-label-currency-lg text-label-currency-lg text-error font-bold mt-2">₹35,000</div>
+            <span class="text-error font-label-caption font-semibold mt-1 block">14 Flats Defaulter</span>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+            <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Total Operational OPEX</span>
+            <div class="font-label-currency-lg text-label-currency-lg text-on-surface font-bold mt-2">₹4,82,000</div>
+            <span class="text-on-surface-variant font-label-caption mt-1 block">99.2% audited with receipts</span>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+            <span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider font-semibold">Net Reserve Balance</span>
+            <div class="font-label-currency-lg text-label-currency-lg text-primary font-bold mt-2">₹9,43,000</div>
+            <span class="text-on-surface-variant font-label-caption mt-1 block">Sinking Fund: ₹6,20,000</span>
+          </div>
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+          
+          <!-- LEFT 7 COLS: BAR CHART -->
+          <div class="xl:col-span-7 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+            <div class="flex items-center justify-between">
+              <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Income vs Operational Expenditure</h2>
+              <div class="flex items-center gap-3 font-label-caption">
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-primary inline-block"></span> Income</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-sm bg-surface-container-highest inline-block"></span> OPEX</span>
+              </div>
+            </div>
+            <div class="w-full bg-surface-container-low/50 rounded-xl p-space-md">
+              <svg class="w-full h-44 overflow-visible" viewBox="0 0 540 180" preserveAspectRatio="none">
+                <line x1="0" y1="30" x2="540" y2="30" stroke="#dae2fd" stroke-dasharray="3 3"></line>
+                <line x1="0" y1="75" x2="540" y2="75" stroke="#dae2fd" stroke-dasharray="3 3"></line>
+                <line x1="0" y1="120" x2="540" y2="120" stroke="#dae2fd" stroke-dasharray="3 3"></line>
+                <line x1="0" y1="165" x2="540" y2="165" stroke="#bdc9c6"></line>
+                
+                <g transform="translate(60, 0)">
+                  <rect x="0" y="55" width="20" height="110" rx="4" fill="#005c55"></rect>
+                  <rect x="24" y="105" width="20" height="60" rx="4" fill="#dae2fd"></rect>
+                  <text x="22" y="177" font-size="10" font-family="Plus Jakarta Sans" fill="#3e4947" text-anchor="middle">May</text>
+                </g>
+                <g transform="translate(140, 0)">
+                  <rect x="0" y="50" width="20" height="115" rx="4" fill="#005c55"></rect>
+                  <rect x="24" y="100" width="20" height="65" rx="4" fill="#dae2fd"></rect>
+                  <text x="22" y="177" font-size="10" font-family="Plus Jakarta Sans" fill="#3e4947" text-anchor="middle">Jun</text>
+                </g>
+                <g transform="translate(220, 0)">
+                  <rect x="0" y="42" width="20" height="123" rx="4" fill="#005c55"></rect>
+                  <rect x="24" y="95" width="20" height="70" rx="4" fill="#dae2fd"></rect>
+                  <text x="22" y="177" font-size="10" font-family="Plus Jakarta Sans" fill="#3e4947" text-anchor="middle">Jul</text>
+                </g>
+                <g transform="translate(300, 0)">
+                  <rect x="0" y="48" width="20" height="117" rx="4" fill="#005c55"></rect>
+                  <rect x="24" y="110" width="20" height="55" rx="4" fill="#dae2fd"></rect>
+                  <text x="22" y="177" font-size="10" font-family="Plus Jakarta Sans" fill="#3e4947" text-anchor="middle">Aug</text>
+                </g>
+                <g transform="translate(380, 0)">
+                  <rect x="0" y="38" width="20" height="127" rx="4" fill="#005c55"></rect>
+                  <rect x="24" y="98" width="20" height="67" rx="4" fill="#dae2fd"></rect>
+                  <text x="22" y="177" font-size="10" font-family="Plus Jakarta Sans" fill="#3e4947" text-anchor="middle">Sep</text>
+                </g>
+                <g transform="translate(460, 0)">
+                  <rect x="0" y="35" width="20" height="130" rx="4" fill="#005c55"></rect>
+                  <rect x="24" y="92" width="20" height="73" rx="4" fill="#dae2fd"></rect>
+                  <text x="22" y="177" font-size="10" font-family="Plus Jakarta Sans" font-weight="bold" fill="#3e4947" text-anchor="middle">Oct</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- RIGHT 5 COLS: DONUT EXPENSE ALLOCATIONS -->
+          <div class="xl:col-span-5 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Expense Allocations</h2>
+            <div class="flex items-center justify-center">
+              <div class="relative w-40 h-40 flex items-center justify-center">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#dae2fd" stroke-width="12"></circle>
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#005c55" stroke-width="12" stroke-dasharray="100 240" stroke-dashoffset="0"></circle>
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#0f766e" stroke-width="12" stroke-dasharray="67 240" stroke-dashoffset="-100"></circle>
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#80d5cb" stroke-width="12" stroke-dasharray="36 240" stroke-dashoffset="-167"></circle>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <span class="font-label-caption text-label-caption uppercase text-on-surface-variant">Security</span>
+                  <span class="font-label-numeric text-label-numeric font-bold">42%</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2 font-body-sm text-body-sm">
+              <div class="flex justify-between"><span>Security Wages (42%)</span><span class="font-label-numeric font-bold">₹2,02,440</span></div>
+              <div class="flex justify-between"><span>Electricity (28%)</span><span class="font-label-numeric font-bold">₹1,34,960</span></div>
+              <div class="flex justify-between"><span>Elevator AMC (15%)</span><span class="font-label-numeric font-bold">₹72,300</span></div>
+              <div class="flex justify-between"><span>Housekeeping (15%)</span><span class="font-label-numeric font-bold">₹72,300</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BACKUP RESTORE TABLE -->
+        <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Local Database Backups (.db)</h2>
+              <p class="font-body-sm text-on-surface-variant">Instant physical snapshot storage</p>
+            </div>
+            <button class="h-10 px-4 rounded-xl bg-primary text-on-primary font-body-sm font-semibold flex items-center gap-2 hover:bg-primary-container transition-all" onclick="alert('New backup snapshot created: backup_2026-10-17_110000.db')">
+              <span class="material-symbols-outlined text-[18px]">save</span>
+              <span>+ Create New Backup</span>
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left font-body-sm">
+              <thead>
+                <tr class="bg-surface-container-low text-on-surface-variant font-label-caption uppercase">
+                  <th class="py-2.5 px-3">File Artifact</th>
+                  <th class="py-2.5 px-3">Footprint</th>
+                  <th class="py-2.5 px-3">Created</th>
+                  <th class="py-2.5 px-3">Status</th>
+                  <th class="py-2.5 px-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="backupRecordsBody">
+                <tr class="border-b border-outline-variant/10">
+                  <td class="py-3 px-3 font-mono font-medium">backup_2026-10-10_110000.db</td>
+                  <td class="py-3 px-3 font-label-numeric">1.42 MB</td>
+                  <td class="py-3 px-3">Today, 11:00 AM</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs">Valid SQLite</span></td>
+                  <td class="py-3 px-3 text-right">
+                    <button class="px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-semibold" onclick="alert('Database restored.')">Restore</button>
+                  </td>
+                </tr>
+                <tr class="border-b border-outline-variant/10">
+                  <td class="py-3 px-3 font-mono font-medium">backup_2026-09-30_235900.db</td>
+                  <td class="py-3 px-3 font-label-numeric">1.38 MB</td>
+                  <td class="py-3 px-3">Sep 30, 2026</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs">Valid SQLite</span></td>
+                  <td class="py-3 px-3 text-right">
+                    <button class="px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-semibold" onclick="alert('Database restored.')">Restore</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- VIEW 4: 26-MODULES DIRECTORY                              -->
+      <!-- ========================================================= -->
+      <section id="view-modules" class="view-panel hidden flex flex-col w-full gap-space-lg">
+        
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+          <div class="flex flex-col">
+            <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Society Operating Schema</h1>
+            <span class="font-label-numeric text-label-numeric text-on-surface-variant">26 Operational Modules Initialized</span>
+          </div>
+        </div>
+
+        <!-- CATEGORY TABS -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1" id="categoryTabs">
+          <button class="category-pill h-9 px-4 rounded-full font-label-badge bg-primary text-on-primary font-bold" onclick="filterCategory('all', this)">All (26)</button>
+          <button class="category-pill h-9 px-4 rounded-full font-label-badge bg-surface-container-high text-on-surface-variant font-bold" onclick="filterCategory('governance', this)">Governance</button>
+          <button class="category-pill h-9 px-4 rounded-full font-label-badge bg-surface-container-high text-on-surface-variant font-bold" onclick="filterCategory('finance', this)">Finance</button>
+          <button class="category-pill h-9 px-4 rounded-full font-label-badge bg-surface-container-high text-on-surface-variant font-bold" onclick="filterCategory('gate', this)">Gate &amp; Security</button>
+          <button class="category-pill h-9 px-4 rounded-full font-label-badge bg-surface-container-high text-on-surface-variant font-bold" onclick="filterCategory('facilities', this)">Facilities</button>
+          <button class="category-pill h-9 px-4 rounded-full font-label-badge bg-surface-container-high text-on-surface-variant font-bold" onclick="filterCategory('admin', this)">Admin</button>
+        </div>
+
+        <!-- MODULES GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-space-md" id="moduleGrid">
+          
+          <div class="module-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer" data-category="governance">
+            <div class="flex items-start justify-between">
+              <span class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center"><span class="material-symbols-outlined">diversity_3</span></span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded-full font-bold">#01</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface mt-3">Community</h3>
+            <p class="font-body-sm text-on-surface-variant mt-1">Central Society profile and master settings.</p>
+          </div>
+
+          <div class="module-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer" data-category="governance">
+            <div class="flex items-start justify-between">
+              <span class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center"><span class="material-symbols-outlined">apartment</span></span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded-full font-bold">#02</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface mt-3">Buildings</h3>
+            <p class="font-body-sm text-on-surface-variant mt-1">Physical blocks, towers, and wings.</p>
+          </div>
+
+          <div class="module-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer" data-category="admin">
+            <div class="flex items-start justify-between">
+              <span class="w-10 h-10 rounded-xl bg-surface-container text-secondary flex items-center justify-center"><span class="material-symbols-outlined">door_front</span></span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded-full font-bold">#03</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface mt-3">Apartments</h3>
+            <p class="font-body-sm text-on-surface-variant mt-1">Flat units, floor mappings, and occupancy status.</p>
+          </div>
+
+          <div class="module-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer" data-category="admin">
+            <div class="flex items-start justify-between">
+              <span class="w-10 h-10 rounded-xl bg-surface-container text-secondary flex items-center justify-center"><span class="material-symbols-outlined">badge</span></span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded-full font-bold">#04</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface mt-3">Residents</h3>
+            <p class="font-body-sm text-on-surface-variant mt-1">Owners, tenants, move-in dates &amp; phones.</p>
+          </div>
+
+          <div class="module-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer" data-category="finance" onclick="switchView('view-maintenance')">
+            <div class="flex items-start justify-between">
+              <span class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center"><span class="material-symbols-outlined">receipt_long</span></span>
+              <span class="text-xs bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded-full font-bold">#08</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface mt-3">Maintenance Bills</h3>
+            <p class="font-body-sm text-on-surface-variant mt-1">Batch generation, line items, and receipts.</p>
+          </div>
+
+          <div class="module-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer" data-category="gate">
+            <div class="flex items-start justify-between">
+              <span class="w-10 h-10 rounded-xl bg-surface-container text-secondary flex items-center justify-center"><span class="material-symbols-outlined">badge</span></span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded-full font-bold">#12</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface mt-3">Visitors Log</h3>
+            <p class="font-body-sm text-on-surface-variant mt-1">Gate check-in, host flat verification, and exit.</p>
+          </div>
+
+          <div class="module-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer" data-category="facilities">
+            <div class="flex items-start justify-between">
+              <span class="w-10 h-10 rounded-xl bg-surface-container text-tertiary flex items-center justify-center"><span class="material-symbols-outlined">report_problem</span></span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded-full font-bold">#11</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface mt-3">Complaints</h3>
+            <p class="font-body-sm text-on-surface-variant mt-1">Helpdesk tickets, priority, and progress logs.</p>
+          </div>
+
+          <div class="module-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer" data-category="finance" onclick="switchView('view-reports')">
+            <div class="flex items-start justify-between">
+              <span class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center"><span class="material-symbols-outlined">monitoring</span></span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded-full font-bold">#23</span>
+            </div>
+            <h3 class="font-headline-sm font-bold text-on-surface mt-3">Reports &amp; Analytics</h3>
+            <p class="font-body-sm text-on-surface-variant mt-1">Balance, collection charts, and income vs expense.</p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full h-8 bg-surface-container-lowest px-space-xl flex items-center justify-between text-on-surface-variant shadow-[0_-1px_4px_rgba(0,0,0,0.02)]">
+      <div class="flex items-center gap-space-md font-label-caption text-label-caption">
+        <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>SQLite Engine: v3.42.0 [WAL Mode Active]</span>
+        <span>•</span>
+        <span>Zero Network Outflow • Fully Local</span>
+      </div>
+      <div class="flex items-center gap-space-md font-label-caption text-label-caption">
+        <span>Desktop Standalone</span>
+        <span>•</span>
+        <span>Master PIN: Active</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODALS                                                    -->
+  <!-- ========================================================= -->
+
+  <!-- BATCH BILLING MODAL -->
+  <div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-space-md" id="batchBillModal">
+    <div class="bg-surface-container-lowest rounded-xl max-w-lg w-full p-space-lg shadow-xl flex flex-col gap-space-md">
+      <div class="flex items-center justify-between">
+        <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Generate Batch Maintenance Invoices</h3>
+        <button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface" onclick="closeModal('batchBillModal')">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+      <p class="font-body-md text-body-md text-on-surface-variant">Batch-generate local invoices for all 48 units for <strong>November 2026</strong>.</p>
+      <div class="space-y-3 font-body-md">
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Billing Month</label>
+          <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" readonly value="November 2026"/>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Base Rate (Rs.)</label>
+            <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none font-label-numeric" value="2500"/>
+          </div>
+          <div>
+            <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Due Date</label>
+            <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none font-label-numeric" value="2026-11-15"/>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-space-sm pt-space-sm">
+        <button class="h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-sm" onclick="closeModal('batchBillModal')">Cancel</button>
+        <button class="h-10 px-space-md rounded-lg bg-primary text-on-primary font-body-sm font-semibold" onclick="alert('48 invoices compiled into local SQLite database!'); closeModal('batchBillModal');">Generate 48 Invoices</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GATE ENTRY MODAL -->
+  <div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-space-md" id="gateVisitorModal">
+    <div class="bg-surface-container-lowest rounded-xl max-w-md w-full p-space-lg shadow-xl flex flex-col gap-space-md">
+      <div class="flex items-center justify-between">
+        <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Quick Gate Registration</h3>
+        <button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface" onclick="closeModal('gateVisitorModal')">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+      <form class="space-y-3 font-body-md" onsubmit="event.preventDefault(); alert('Visitor registered successfully!'); closeModal('gateVisitorModal');">
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Visitor Full Name</label>
+          <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" placeholder="e.g. Alok Verma" required type="text"/>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Destination Flat</label>
+            <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" placeholder="e.g. Flat B-101" required type="text"/>
+          </div>
+          <div>
+            <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Vehicle Plate #</label>
+            <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" placeholder="KA-05-AB-1234" type="text"/>
+          </div>
+        </div>
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Visit Purpose</label>
+          <select class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none">
+            <option>Guest / Friend</option>
+            <option>Delivery / Courier</option>
+            <option>Technician / Maintenance</option>
+            <option>Cab Pick/Drop</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-end gap-space-sm pt-space-sm">
+          <button class="h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-sm" onclick="closeModal('gateVisitorModal')" type="button">Cancel</button>
+          <button class="h-10 px-space-md rounded-lg bg-primary text-on-primary font-body-sm font-semibold" type="submit">Authorize Entry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- RECORD PAYMENT MODAL -->
+  <div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-space-md" id="offlinePayModal">
+    <div class="bg-surface-container-lowest rounded-xl max-w-md w-full p-space-lg shadow-xl flex flex-col gap-space-md">
+      <div class="flex items-center justify-between">
+        <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Record Offline Payment</h3>
+        <button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface" onclick="closeModal('offlinePayModal')">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+      <form class="space-y-3 font-body-md" onsubmit="event.preventDefault(); alert('Payment recorded. Bill marked as PAID!'); closeModal('offlinePayModal');">
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Apartment Unit</label>
+          <select class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none">
+            <option>Flat A-101 (John Doe - Due: Rs. 3,100)</option>
+            <option>Flat B-204 (Vikram Sharma - Due: Rs. 2,800)</option>
+            <option>Flat C-104 (Ananya Sen - Due: Rs. 2,500)</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Amount (Rs.)</label>
+            <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none font-label-numeric" required type="number" value="3100"/>
+          </div>
+          <div>
+            <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Method</label>
+            <select class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none">
+              <option>UPI QR Code</option>
+              <option>Cash at Office</option>
+              <option>Cheque Deposit</option>
+              <option>Direct Bank NEFT</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Reference (Optional)</label>
+          <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" placeholder="e.g. UPI Ref #410294" type="text"/>
+        </div>
+        <div class="flex items-center justify-end gap-space-sm pt-space-sm">
+          <button class="h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-sm" onclick="closeModal('offlinePayModal')" type="button">Cancel</button>
+          <button class="h-10 px-space-md rounded-lg bg-primary text-on-primary font-body-sm font-semibold" type="submit">Commit &amp; Print Receipt</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ONBOARD RESIDENT MODAL -->
+  <div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-space-md" id="onboardModal">
+    <div class="bg-surface-container-lowest rounded-xl max-w-md w-full p-space-lg shadow-xl flex flex-col gap-space-md">
+      <div class="flex items-center justify-between">
+        <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Resident Onboarding</h3>
+        <button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface" onclick="closeModal('onboardModal')">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+      <div class="space-y-3 font-body-md">
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Resident Full Name</label>
+          <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" placeholder="e.g. Priya Sundaram" type="text"/>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Assigned Flat</label>
+            <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" placeholder="A-104 (Vacant)" type="text"/>
+          </div>
+          <div>
+            <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Type</label>
+            <select class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none">
+              <option>Owner</option>
+              <option>Tenant</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Phone Number</label>
+          <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none font-label-numeric" placeholder="+91 98450 00000" type="tel"/>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-space-sm pt-space-sm">
+        <button class="h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-sm" onclick="closeModal('onboardModal')">Cancel</button>
+        <button class="h-10 px-space-md rounded-lg bg-primary text-on-primary font-body-sm font-semibold" onclick="alert('Resident registered into database successfully!'); closeModal('onboardModal');">Save Resident</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTICE BROADCAST MODAL -->
+  <div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-space-md" id="noticeModal">
+    <div class="bg-surface-container-lowest rounded-xl max-w-md w-full p-space-lg shadow-xl flex flex-col gap-space-md">
+      <div class="flex items-center justify-between">
+        <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Publish Society Broadcast</h3>
+        <button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface" onclick="closeModal('noticeModal')">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+      <div class="space-y-3 font-body-md">
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Headline</label>
+          <input class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" placeholder="e.g. Diwali Gala &amp; Fireworks Guidelines" type="text"/>
+        </div>
+        <div>
+          <label class="block font-label-caption text-on-surface-variant uppercase mb-1 font-semibold">Announcement Body</label>
+          <textarea class="w-full p-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm focus:outline-none" placeholder="Type notice details..." rows="3"></textarea>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-space-sm pt-space-sm">
+        <button class="h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-sm" onclick="closeModal('noticeModal')">Discard</button>
+        <button class="h-10 px-space-md rounded-lg bg-primary text-on-primary font-body-sm font-semibold" onclick="alert('Notice broadcast pinned to lobby display!'); closeModal('noticeModal');">Broadcast</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT CONTROLLER -->
+  <script>
+    function switchView(targetId) {
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
+      const activePanel = document.getElementById(targetId);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      // Update sidebar nav highlighting
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        if (btn.getAttribute('data-target') === targetId) {
+          btn.classList.add('nav-active');
+          btn.classList.remove('text-on-surface-variant');
+        } else {
+          btn.classList.remove('nav-active');
+          btn.classList.add('text-on-surface-variant');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.nav-item[data-target]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        if (target) switchView(target);
+      });
+    });
+
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    }
+
+    function markExit(btn) {
+      const row = btn.closest('tr');
+      if (!row) return;
+      row.style.opacity = '0.4';
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined text-[14px]">done</span> Exited`;
+      btn.className = 'h-8 px-2.5 rounded-lg bg-surface-container text-on-surface-variant font-label-badge text-label-badge inline-flex items-center gap-1 cursor-not-allowed';
+    }
+
+    function filterCategory(category, btn) {
+      document.querySelectorAll('.category-pill').forEach(p => {
+        p.classList.remove('bg-primary', 'text-on-primary');
+        p.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+      });
+      if (btn) {
+        btn.classList.add('bg-primary', 'text-on-primary');
+        btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+      }
+
+      document.querySelectorAll('.module-card').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
