@@ -114,14 +114,16 @@ graph LR
 6. Tap **Save**. Repeat for all towers in your society.
 
 ### Step 3: Floors
-1. Go to **Modules** → Tap **Buildings** or **Floors**.
-2. Select the Building and enter the Floor Number (e.g., `1`, `2`, `3`).
-3. Optionally give it a label (e.g., *Ground Floor*, *First Floor*).
+- **Automatic Creation**: When you enter **Total Floors** while creating or editing a **Building** (e.g., 5 floors), the app automatically generates Floor 1 through Floor 5 for that building.
+- **Managing / Custom Floors**:
+  1. Go to **Modules** → Tap **Buildings** → Tap the **Layers icon** (or the top **All Floors** button) or go to **Apartments** → Tap **Manage Floors**.
+  2. You can view all floors per building, tap **Edit** to give custom labels (e.g., rename `Floor 1` to `Ground Floor`, or `Floor -1` to `Basement 1`), or tap **+ Add Floor** for extra levels (e.g., *Terrace*, *Mezzanine*).
+  3. Tap **Auto-Generate** in the top bar anytime to automatically sync floors with your building counts.
 
 ### Step 4: Apartments / Flats
 1. Go to **Modules** → Tap **Apartments**.
 2. Tap **+ (Add)**.
-3. Select the **Building** and **Floor**.
+3. Select the **Building** and **Floor** (e.g., *Tower A - Floor 1* or *Tower A - Ground Floor*).
 4. Enter the **Apartment Number** (e.g., *101*, *A-204*, *Penthouse 1*).
 5. Enter the **Area (Sq. Ft.)** (e.g., *1250*) and **Type** (e.g., *2BHK*, *3BHK*).
 6. Set the initial status to **Vacant**.

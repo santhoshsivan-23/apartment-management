@@ -18,6 +18,7 @@ class GenericCrudScreen extends StatefulWidget {
   final String titleField; // which field to show as the list tile title
   final String? subtitleField;
   final Widget Function(Map<String, dynamic> row)? trailingBuilder;
+  final List<Widget>? actions;
 
   const GenericCrudScreen({
     super.key,
@@ -27,6 +28,7 @@ class GenericCrudScreen extends StatefulWidget {
     required this.titleField,
     this.subtitleField,
     this.trailingBuilder,
+    this.actions,
   });
 
   @override
@@ -108,7 +110,10 @@ class _GenericCrudScreenState extends State<GenericCrudScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: widget.actions,
+      ),
       body: Column(
         children: [
           Padding(
@@ -140,17 +145,33 @@ class _GenericCrudScreenState extends State<GenericCrudScreen> {
                               subtitle: widget.subtitleField != null
                                   ? Text('${row[widget.subtitleField!] ?? ''}')
                                   : null,
-                              trailing: widget.trailingBuilder?.call(row) ??
-                                  PopupMenuButton<String>(
-                                    onSelected: (v) {
-                                      if (v == 'edit') _openForm(existing: row);
-                                      if (v == 'delete') _delete(row);
-                                    },
-                                    itemBuilder: (_) => const [
-                                      PopupMenuItem(value: 'edit', child: Text('Edit')),
-                                      PopupMenuItem(value: 'delete', child: Text('Delete')),
-                                    ],
-                                  ),
+                              trailing: widget.trailingBuilder != null
+                                  ? Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        widget.trailingBuilder!(row),
+                                        PopupMenuButton<String>(
+                                          onSelected: (v) {
+                                            if (v == 'edit') _openForm(existing: row);
+                                            if (v == 'delete') _delete(row);
+                                          },
+                                          itemBuilder: (_) => const [
+                                            PopupMenuItem(value: 'edit', child: Text('Edit')),
+                                            PopupMenuItem(value: 'delete', child: Text('Delete')),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  : PopupMenuButton<String>(
+                                      onSelected: (v) {
+                                        if (v == 'edit') _openForm(existing: row);
+                                        if (v == 'delete') _delete(row);
+                                      },
+                                      itemBuilder: (_) => const [
+                                        PopupMenuItem(value: 'edit', child: Text('Edit')),
+                                        PopupMenuItem(value: 'delete', child: Text('Delete')),
+                                      ],
+                                    ),
                               onTap: () => _openForm(existing: row),
                             );
                           },
@@ -296,14 +317,40 @@ class _RecordFormState extends State<_RecordForm> {
         final staticOptions = f.options;
         final dynamicOptions = _loadedOptions[f.key];
         if (dynamicOptions != null) {
-          return DropdownButtonFormField<int>(
-            value: _values[f.key] is int ? _values[f.key] as int : null,
-            decoration: InputDecoration(labelText: f.label, border: const OutlineInputBorder()),
-            items: dynamicOptions.entries
-                .map((e) => DropdownMenuItem(value: e.key, child: Text(e.value)))
-                .toList(),
-            onChanged: (v) => setState(() => _values[f.key] = v),
-            validator: (v) => f.required && v == null ? '${f.label} is required' : null,
+          final isEmpty = dynamicOptions.isEmpty;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DropdownButtonFormField<int>(
+                value: _values[f.key] is int ? _values[f.key] as int : null,
+                decoration: InputDecoration(
+                  labelText: f.label,
+                  border: const OutlineInputBorder(),
+                  helperText: isEmpty && f.key == 'floor_id'
+                      ? 'No floors yet. Floors are generated from Buildings or Manage Floors.'
+                      : null,
+                ),
+                hint: Text(isEmpty ? 'No ${f.label.toLowerCase()}s found' : 'Select ${f.label}'),
+                items: dynamicOptions.entries
+                    .map((e) => DropdownMenuItem(value: e.key, child: Text(e.value)))
+                    .toList(),
+                onChanged: (v) => setState(() => _values[f.key] = v),
+                validator: (v) => f.required && v == null ? '${f.label} is required' : null,
+              ),
+              if (isEmpty && f.key == 'floor_id') ...[
+                const SizedBox(height: 4),
+                TextButton.icon(
+                  onPressed: () async {
+                    if (f.optionsLoader != null) {
+                      final opts = await f.optionsLoader!();
+                      if (mounted) setState(() => _loadedOptions[f.key] = opts);
+                    }
+                  },
+                  icon: const Icon(Icons.refresh, size: 16),
+                  label: const Text('Refresh Floors'),
+                ),
+              ],
+            ],
           );
         }
         return DropdownButtonFormField<String>(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/widgets/generic_crud_screen.dart';
 import '../../core/widgets/field_config.dart';
 import '../../core/utils/option_loaders.dart';
+import '../buildings/floors_screen.dart';
 
 class ApartmentsScreen extends StatelessWidget {
   const ApartmentsScreen({super.key});
@@ -13,6 +14,18 @@ class ApartmentsScreen extends StatelessWidget {
       tableName: 'apartments',
       titleField: 'apartment_number',
       subtitleField: 'status',
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.layers_rounded),
+          tooltip: 'Manage Floors',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const FloorsScreen()),
+            );
+          },
+        ),
+      ],
       fields: [
         FieldConfig(
           key: 'building_id',
