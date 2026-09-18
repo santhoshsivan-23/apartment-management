@@ -530,4 +530,359 @@ flowchart TD
    - Go to **Modules** → **Family** to add spouse/children.
    - Go to **Modules** → **Vehicles** to register cars for gate security & parking bay allotment.
 
+---
+
+## 6. The Complete Society Story: Day 1 Launch to Daily Living (Module-by-Module Journey)
+
+### Prologue: Meet the Society & The Administrator
+*Welcome to **"Greenwood Grandeur Residential Community"**, a modern township featuring **3 grand residential towers (Building A, Building B, Building C)**, each standing **10 floors tall**.*
+
+*The Management Committee has just handed a new tablet to **Mr. Arvind Kumar**, the Society General Manager. The device has AMS Local installed. Arvind powers on the screen to configure the township from scratch and welcome the first 10 families into their new homes:*
+- **Building A (Floor 1)**: Sharma Family (A-101), Patel Family (A-102), Verma Family (A-103)
+- **Building B (Floor 10 - Sky Residences)**: Mehta Family (B-1001), Kapoor Family (B-1002), Singhania Family (B-1003)
+- **Building C (Floor 2 & Floor 5)**: 
+  - Floor 2: Iyer Family (C-201), Nair Family (C-202)
+  - Floor 5: Reddy Family (C-501), Das Family (C-502)
+
+Here is the exact story of how Arvind sets up the entire society, module by module, and how daily life unfolds seamlessly.
+
+---
+
+### Act 1: First Power-On & Master Administration Setup
+**Modules Involved**: `App Security`, `Auth PIN`, `Society Profile`
+
+1. **Unboxing & First Launch**:
+   - Arvind taps the AMS Local app icon on his tablet.
+   - The screen displays the **First-Time Master Setup** prompt.
+2. **Setting the Master PIN**:
+   - Arvind sets a secure 6-digit Master PIN: `889900` and enables Biometric / Fingerprint login.
+3. **Configuring the Society Profile**:
+   - Under **Settings → Society Profile**, Arvind enters:
+     - **Society Name**: *Greenwood Grandeur RWA*
+     - **Address**: *Plot 42, Outer Ring Road, Green Valley, Tech Corridor*
+     - **Contact**: *manager@greenwoodgrandeur.org | +91 98765 43210*
+     - **Fiscal Year**: *April 1 – March 31*
+   - Tapping **Save Society Profile** creates the root administrative record in the local database.
+
+---
+
+### Act 2: Constructing the Towers (Module: Buildings)
+**Modules Involved**: `Buildings`
+
+Arvind navigates to **Modules → Buildings** to set up the physical layout.
+
+```
+[Modules] ➔ [Buildings] ➔ [+ Add Building]
+```
+
+1. **Building A (Tower A - Sapphire)**:
+   - Name: `Building A`
+   - Total Floors: `10`
+   - Total Apartments: `30`
+   - Tap **Save**.
+2. **Building B (Tower B - Emerald)**:
+   - Name: `Building B`
+   - Total Floors: `10`
+   - Total Apartments: `30`
+   - Tap **Save**.
+3. **Building C (Tower C - Diamond)**:
+   - Name: `Building C`
+   - Total Floors: `10`
+   - Total Apartments: `30`
+   - Tap **Save**.
+
+*The dashboard now shows 3 Buildings created with a total capacity of 30 floors and 90 apartments.*
+
+---
+
+### Act 3: Going Vertical — The 10 Floors (Module: Floors)
+**Modules Involved**: `Floors`
+
+Arvind needs to ensure that every building has its 10 floors properly mapped.
+
+1. **Automatic Floor Provisioning**:
+   - Arvind opens **Modules → Buildings** and taps the **Layers icon** on `Building A`.
+   - The system has already automatically provisioned **Floor 1 through Floor 10** (`Floor 1`, `Floor 2`, ..., `Floor 10`) linked to `building_id: A`.
+2. **Verification for Building B & Building C**:
+   - Arvind inspects `Building B`: Floors 1 to 10 are active.
+   - Arvind inspects `Building C`: Floors 1 to 10 are active.
+3. **Customization (Optional)**:
+   - Arvind opens **Modules → Floors**, taps on *Floor 10 of Building B*, and edits its label to `Floor 10 (Penthouse & Sky Suites)` for premium clarity.
+
+---
+
+### Act 4: Laying Out the Apartments (Module: Apartments)
+**Modules Involved**: `Apartments`
+
+Now, Arvind configures the specific flats where the families will reside.
+
+```
+[Modules] ➔ [Apartments] ➔ [+ Add Flat]
+```
+
+1. **Building A — Floor 1 (3 Units)**:
+   - Flat `A-101`: Building: `Building A`, Floor: `Floor 1`, Type: `2BHK`, Area: `1,200 sqft`, Status: `Vacant`.
+   - Flat `A-102`: Building: `Building A`, Floor: `Floor 1`, Type: `2BHK`, Area: `1,200 sqft`, Status: `Vacant`.
+   - Flat `A-103`: Building: `Building A`, Floor: `Floor 1`, Type: `3BHK`, Area: `1,500 sqft`, Status: `Vacant`.
+2. **Building B — Floor 10 (3 Units)**:
+   - Flat `B-1001`: Building: `Building B`, Floor: `Floor 10`, Type: `3BHK`, Area: `1,600 sqft`, Status: `Vacant`.
+   - Flat `B-1002`: Building: `Building B`, Floor: `Floor 10`, Type: `3BHK`, Area: `1,600 sqft`, Status: `Vacant`.
+   - Flat `B-1003`: Building: `Building B`, Floor: `Floor 10`, Type: `Penthouse`, Area: `2,400 sqft`, Status: `Vacant`.
+3. **Building C — Floor 2 & Floor 5 (4 Units)**:
+   - Flat `C-201`: Building: `Building C`, Floor: `Floor 2`, Type: `2BHK`, Area: `1,150 sqft`, Status: `Vacant`.
+   - Flat `C-202`: Building: `Building C`, Floor: `Floor 2`, Type: `2BHK`, Area: `1,150 sqft`, Status: `Vacant`.
+   - Flat `C-501`: Building: `Building C`, Floor: `Floor 5`, Type: `3BHK`, Area: `1,450 sqft`, Status: `Vacant`.
+   - Flat `C-502`: Building: `Building C`, Floor: `Floor 5`, Type: `3BHK`, Area: `1,450 sqft`, Status: `Vacant`.
+
+*All 10 target flats now appear in the inventory with bright blue 'Vacant' status badges.*
+
+---
+
+### Act 5: Demarcating Basement Parking Bays (Module: Parking Slots)
+**Modules Involved**: `Parking Slots`
+
+To avoid parking disputes upon move-in, Arvind configures dedicated parking slots:
+- **Tower A Basement**: Arvind creates slots `P-A01`, `P-A02`, `P-A03` (Basement Level -1).
+- **Tower B Basement**: Arvind creates slots `P-B10`, `P-B11`, `P-B12` (Basement Level -1).
+- **Tower C Basement**: Arvind creates slots `P-C03`, `P-C04` (Floor 2 allotments) and `P-C09`, `P-C10` (Floor 5 allotments).
+*All parking bays are marked as `Available`.*
+
+---
+
+### Act 6: Club Facilities & Maintenance Tariff Setup (Modules: Amenities & Pricing)
+**Modules Involved**: `Amenities`, `Pricing & Tariffs`
+
+Arvind configures the shared community facilities and billing rules:
+1. **Amenities Configuration**:
+   - `Clubhouse Banquet Hall`: ₹1,500/session, max capacity 100 people.
+   - `Olympic Swimming Pool`: Free for residents, slot timing 6:00 AM – 9:00 PM.
+   - `Fitness Center & Gym`: Free for residents.
+   - `Badminton Court`: ₹100/hour slot reservation.
+2. **Maintenance Tariff Rules**:
+   - `2BHK Standard Rate`: ₹3,500 / month (covers water, 24/7 security, lift, common power).
+   - `3BHK Premium Rate`: ₹4,500 / month.
+   - `Penthouse Luxury Rate`: ₹7,000 / month.
+
+---
+
+### Act 7: The House Booking Ceremony (Module: Bookings & Agreements)
+**Modules Involved**: `Customers / Inquiries`, `Apartment Booking`, `Payments`
+
+The families visit the management office to complete their house booking and move-in agreements:
+
+1. **Building A — Floor 1 Bookings**:
+   - **Mr. Rajesh Sharma** books Flat `A-101`: Pays ₹1,00,000 advance token deposit via Cheque #440121. Arvind records the transaction under **Payments**.
+   - **Mr. Amit Patel** books Flat `A-102`: Pays token deposit via Bank NEFT.
+   - **Mr. Suresh Verma** books Flat `A-103`: Pays token deposit via UPI.
+2. **Building B — Floor 10 Bookings**:
+   - **Mr. Karan Mehta** books Flat `B-1001`.
+   - **Mr. Rohan Kapoor** books Flat `B-1002`.
+   - **Mr. Vikram Singhania** books Penthouse `B-1003` with exclusive terrace rights.
+3. **Building C — Floor 2 & 5 Bookings**:
+   - **Mr. Venkatesh Iyer** (C-201) & **Mr. Pradeep Nair** (C-202) book Floor 2 flats.
+   - **Mr. Anand Reddy** (C-501) & **Mr. Subhash Das** (C-502) book Floor 5 flats.
+
+*Each flat status automatically transitions from `Vacant` to `Booked`.*
+
+---
+
+### Act 8: Welcoming the Primary Residents (Module: Residents)
+**Modules Involved**: `Residents`, `Apartments`
+
+Move-in day arrives! Arvind opens **Modules → Residents** and officially registers each family head.
+
+```
+[Modules] ➔ [Residents] ➔ [+ Add Resident]
+```
+
+1. **Registering Sharma Family Head**:
+   - Name: `Rajesh Sharma` | Phone: `98111-22334` | Email: `rajesh.sharma@example.com`
+   - Flat: `A-101 (Building A, Floor 1)` | Type: `Owner` | Move-in Date: `2026-09-01`
+   - Assigned Parking: `P-A01`
+   - Tap **Save** ➔ Flat `A-101` automatically transitions from `Booked` to **Occupied**!
+2. **Registering All Remaining Resident Heads**:
+   - Flat `A-102` ➔ `Amit Patel` (Owner) ➔ Assigned `P-A02` ➔ **Occupied**
+   - Flat `A-103` ➔ `Suresh Verma` (Owner) ➔ Assigned `P-A03` ➔ **Occupied**
+   - Flat `B-1001` ➔ `Karan Mehta` (Owner) ➔ Assigned `P-B10` ➔ **Occupied**
+   - Flat `B-1002` ➔ `Rohan Kapoor` (Tenant) ➔ Assigned `P-B11` ➔ **Occupied**
+   - Flat `B-1003` ➔ `Vikram Singhania` (Owner) ➔ Assigned `P-B12` ➔ **Occupied**
+   - Flat `C-201` ➔ `Venkatesh Iyer` (Owner) ➔ Assigned `P-C03` ➔ **Occupied**
+   - Flat `C-202` ➔ `Pradeep Nair` (Tenant) ➔ Assigned `P-C04` ➔ **Occupied**
+   - Flat `C-501` ➔ `Anand Reddy` (Owner) ➔ Assigned `P-C09` ➔ **Occupied**
+   - Flat `C-502` ➔ `Subhash Das` (Owner) ➔ Assigned `P-C10` ➔ **Occupied**
+
+*All 10 flats in Buildings A, B, and C now display solid emerald 'Occupied' badges.*
+
+---
+
+### Act 9: Enrolling Every Family Member (Module: Family Members)
+**Modules Involved**: `Family Members`
+
+Arvind now records all family members living inside each unit to ensure society identity passes and club privileges:
+
+```
+[Modules] ➔ [Family Members] ➔ [+ Add Member]
+```
+
+1. **Sharma Family (Flat A-101)**:
+   - Primary Resident: `Rajesh Sharma`
+   - Member 1: `Sunita Sharma` (Spouse, Age 42, Phone: 98111-22335)
+   - Member 2: `Rohan Sharma` (Son, Age 16)
+   - Member 3: `Ananya Sharma` (Daughter, Age 12)
+2. **Mehta Family (Flat B-1001)**:
+   - Primary Resident: `Karan Mehta`
+   - Member 1: `Priya Mehta` (Spouse)
+   - Member 2: `Aryan Mehta` (Son, Age 8)
+   - Member 3: `Devi Mehta` (Mother, Senior Citizen)
+3. **Singhania Family (Flat B-1003)**:
+   - Primary Resident: `Vikram Singhania`
+   - Member 1: `Radhika Singhania` (Spouse)
+   - Member 2: `Tara Singhania` (Daughter, Age 7)
+   - Member 3: `Veer Singhania` (Son, Age 4)
+4. *Arvind repeats the same quick entry for the Patel, Verma, Kapoor, Iyer, Nair, Reddy, and Das families.*
+
+---
+
+### Act 10: Registering Vehicles & Smart Boom-Barrier Access (Module: Vehicles)
+**Modules Involved**: `Vehicles`, `Parking Slots`
+
+To prevent unauthorized parking and automate gate entry:
+
+```
+[Modules] ➔ [Vehicles] ➔ [+ Add Vehicle]
+```
+
+1. **Building A Vehicles**:
+   - `Rajesh Sharma (A-101)`: White Honda City `KA-01-MJ-1001` ➔ Linked to Bay `P-A01`.
+   - `Amit Patel (A-102)`: Grey Hyundai Creta `KA-01-PT-2002` ➔ Linked to Bay `P-A02`.
+   - `Suresh Verma (A-103)`: Maroon Toyota Innova `KA-01-VM-3003` ➔ Linked to Bay `P-A03`.
+2. **Building B Vehicles**:
+   - `Karan Mehta (B-1001)`: Blue Kia Seltos `KA-02-MH-4004` ➔ Linked to Bay `P-B10`.
+   - `Rohan Kapoor (B-1002)`: Black Skoda Slavia `KA-02-KP-5005` ➔ Linked to Bay `P-B11`.
+   - `Vikram Singhania (B-1003)`: Silver Mercedes GLC `KA-02-SG-9999` ➔ Linked to Bay `P-B12`.
+3. **Building C Vehicles**:
+   - `Venkatesh Iyer (C-201)`: White Maruti Baleno `KA-03-IY-1101` ➔ Linked to Bay `P-C03`.
+   - `Pradeep Nair (C-202)`: Red Tata Nexon `KA-03-NR-2202` ➔ Linked to Bay `P-C04`.
+   - `Anand Reddy (C-501)`: Silver Mahindra XUV700 `KA-03-RD-5501` ➔ Linked to Bay `P-C09`.
+   - `Subhash Das (C-502)`: Grey Honda Elevate `KA-03-DS-6602` ➔ Linked to Bay `P-C10`.
+
+*Security guards at Gate 1 and Gate 2 can now scan number plates and RFID tags against the database.*
+
+---
+
+### Act 11: Deploying the Society Workforce (Module: Staff & Security)
+**Modules Involved**: `Staff`, `Security Guards`
+
+Arvind onboards the essential society team:
+- **Security Team**:
+  - `Ramesh Thapa`: Head Security Guard, assigned to **Main Gate 1** (Day Shift).
+  - `Sunil Gurung`: Patrol Guard, assigned to **Building A, B, and C Basements & Towers**.
+- **Maintenance Team**:
+  - `Mahesh Yadav`: Certified Society Plumber.
+  - `Kishore Lal`: Society Electrician.
+- **Housekeeping**:
+  - `Anita Bai`: Dedicated floor attendant for Towers A and B.
+
+---
+
+### Act 12: Daily Life in Greenwood Grandeur — Real Operations Across All Modules
+
+Now the society is fully alive! Let's follow how daily events trigger every module:
+
+#### Event 12.1: A Guest Arrives for the Sharma Family (Module: Visitors)
+- **10:15 AM**: A guest, *Mr. Alok Verma*, arrives at **Main Gate 1** requesting entry to **Flat A-101**.
+- Guard *Ramesh Thapa* opens **Modules → Visitors → + Add Visitor**:
+  - Visitor Name: `Alok Verma` | Phone: `98444-12345`
+  - Visiting: `Flat A-101 (Rajesh Sharma)` | Purpose: `Personal Visit`
+  - Vehicle: `KA-05-XY-8812`
+- Guard taps **Generate Gate Pass**. An SMS / in-app notification alerts Rajesh Sharma.
+- The guard admits the guest. Upon departure at 1:30 PM, the guard taps **Check-Out**, timestamping the exit.
+
+#### Event 12.2: Birthday Party in the Clubhouse (Module: Amenity Bookings)
+- **2:00 PM**: *Vikram Singhania* (Penthouse B-1003) wants to host his daughter Tara's 7th birthday celebration this Sunday.
+- He visits the office. Arvind opens **Modules → Amenity Bookings → + Book Amenity**:
+  - Amenity: `Clubhouse Banquet Hall`
+  - Resident: `Vikram Singhania (B-1003)`
+  - Date & Time: `Upcoming Sunday, 5:00 PM – 10:00 PM`
+  - Fee: `₹1,500`
+- Arvind taps **Confirm Booking**. The Clubhouse calendar is locked for Sunday evening, preventing duplicate bookings.
+
+#### Event 12.3: 1st of the Month Maintenance Billing (Module: Invoices & Billing)
+- **1st of the Month, 8:00 AM**: Arvind runs the automated monthly maintenance bill generator:
+  - Flats A-101, A-102, C-201, C-202 (2BHK): Invoiced `₹3,500` each.
+  - Flats A-103, B-1001, B-1002, C-501, C-502 (3BHK): Invoiced `₹4,500` each.
+  - Flat B-1003 (Penthouse): Invoiced `₹7,000`.
+- 10 digital invoices are generated with unique invoice numbers (`INV-2026-09-001` through `010`) and due date set to the 10th of the month.
+
+#### Event 12.4: Settling Dues & Generating Receipts (Module: Payments & Receipts)
+- **3rd of the Month**:
+  - *Amit Patel* (A-102) opens his app and pays `₹3,500` via UPI.
+  - *Anand Reddy* (C-501) hands Arvind a cheque for `₹4,500`.
+- Arvind records the payments in **Modules → Payments**:
+  - Invoice `INV-2026-09-002` marks as **Paid**.
+  - A PDF receipt (`REC-2026-0089`) with QR code verification is automatically generated and sent to Amit Patel.
+
+#### Event 12.5: The Dripping Pipe Helpdesk Ticket (Module: Complaints & Helpdesk)
+- **11:30 AM**: *Amit Patel* (A-102) notices water dripping from the kitchen ceiling pipe.
+- Arvind opens **Modules → Complaints → + Log Complaint**:
+  - Flat: `A-102` | Resident: `Amit Patel`
+  - Category: `Plumbing` | Priority: `High`
+  - Description: *Kitchen ceiling pipe joint dripping water.*
+  - Assigned To: `Mahesh Yadav (Society Plumber)`
+  - Status: `In Progress`
+- Mahesh arrives at A-102, replaces the faulty washer within 45 minutes.
+- Arvind updates the ticket to `Resolved`, adds notes: *W-Ring joint replaced, tested under high pressure.*
+- Amit Patel confirms resolution with a 5-star rating.
+
+#### Event 12.6: Emergency Society Broadcast (Module: Notice Board)
+- **4:00 PM**: The municipal water board announces a 6-hour supply shutdown tomorrow for main pipeline repairs.
+- Arvind opens **Modules → Notice Board → + Post Notice**:
+  - Title: `Notice: Scheduled Municipal Water Supply Maintenance`
+  - Target: `All Buildings (Building A, Building B, Building C)`
+  - Priority: `Urgent`
+  - Content: *Please store adequate water for tomorrow between 10:00 AM and 4:00 PM. Society backup borewell will operate as scheduled.*
+- The notice is instantly broadcast across all residents' dashboards and printed on the digital notice boards in Tower A, B, and C lobbies.
+
+#### Event 12.7: Society Vendor Expenses & Financial Audit (Modules: Expenses & Accounts)
+- **End of the Month**:
+  - Arvind opens **Modules → Expenses** to log society vendor disbursements:
+    - *Voucher #EXP-101*: `Apex Security Agency` — ₹45,000 (Monthly security contract for 3 towers).
+    - *Voucher #EXP-102*: `State Electricity Board` — ₹28,400 (Lift & common lighting power for Buildings A, B, C).
+    - *Voucher #EXP-103*: `CleanPro Chemical Supplies` — ₹6,200 (Swimming pool chlorine & cleaning).
+- Arvind clicks **Reports → Income vs Expense**:
+  - Total Maintenance Collected: `₹43,500`
+  - Total Facility Booking Revenue: `₹1,500`
+  - Society Operating Expense: `₹79,600` (Balanced by Society Reserve Fund).
+  - The society ledger balances to the rupee!
+
+---
+
+### Epilogue: Summary of Data Continuity Across the 3 Buildings
+
+```mermaid
+journey
+    title A Day in Greenwood Grandeur: From Power-On to Community Harmony
+    section Morning Setup
+      Power on device & enter PIN: 5: Admin
+      Create 3 Towers (A, B, C): 5: Admin
+      Verify 10 Floors each: 5: System
+      Create Target Flats (A-101..C-502): 5: Admin
+    section Move-In & Families
+      Book Flats & Record Deposits: 5: Residents
+      Register 10 Primary Resident Heads: 5: Admin
+      Enroll Family Members & Kids: 5: Admin
+      Allot Parking Bays & RFID: 5: Security
+    section Daily Living
+      Gate Security verifies Guest: 5: Gate Guard
+      Banquet Hall reserved for Birthday: 5: Resident
+      Monthly Maintenance Bills sent: 5: System
+      Plumbing complaint solved in 45m: 5: Staff
+      Audited balance sheet exported: 5: Admin
+```
+
+Every module in AMS Local connects together in a continuous, unbroken chain:
+$$\text{Security PIN} \to \text{Buildings} \to \text{Floors} \to \text{Flats} \to \text{Residents} \to \text{Families} \to \text{Vehicles} \to \text{Gate Visitors} \to \text{Billing} \to \text{Receipts}$$
+The entire residential township is now self-sufficient, secure, and digitally powered!
+
+
 
