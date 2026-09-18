@@ -241,3 +241,293 @@ $$\text{Complaint Logged} \longrightarrow \text{Staff / Vendor Dispatched} \long
 3. **Resolution**: Technician repairs leak. Admin adds work log comment and marks ticket **Resolved**.
 4. **Vendor Payout & Expense**: Plumbing invoice paid (`Rs. 850`) and recorded under *Plumbing Repairs* expense category.
 5. **Financial Telemetry**: Net Reserve = Collections minus OPEX updated on Reports dashboard.
+
+---
+
+## 4. Master Top-to-Bottom Sequential Execution Flowchart
+
+The following diagram illustrates the complete, continuous top-to-bottom execution path from initial foundation to day-to-day living, booking, gate security, maintenance billing, and settlement:
+
+```mermaid
+flowchart TD
+    START([🏁 START: Empty Database Initialization]) --> STEP1
+
+    %% ----------------------------------------------------
+    %% PHASE 1: PHYSICAL INFRASTRUCTURE
+    %% ----------------------------------------------------
+    subgraph P1["PHASE 1: Physical Infrastructure Building"]
+        direction TB
+        STEP1["<b>1. Create Community Profile</b><br/>• Name: Sunrise Heights CHS<br/>• Address, City, Pincode, Email, Office Phone"]
+        STEP2["<b>2. Create Buildings / Towers</b><br/>• Tower A (Total Floors: 5, Total Units: 20)<br/>• Tower B (Total Floors: 4, Total Units: 16)"]
+        STEP3["<b>3. Auto-Generate & Label Floors</b><br/>• Floors 1..5 auto-created in database<br/>• Custom floors: Ground Floor (0), Basement (-1)"]
+        STEP4["<b>4. Create Apartments / Rooms</b><br/>• Flat Number: A-204 (Tower A, Floor 2)<br/>• Type: 2BHK | Area: 1,250 sqft | Status: Vacant"]
+        STEP5["<b>5. Allot Parking Slots</b><br/>• Slot P-14 (Covered 4-Wheeler)<br/>• Assigned to Flat A-204"]
+
+        STEP1 --> STEP2 --> STEP3 --> STEP4 --> STEP5
+    end
+
+    %% ----------------------------------------------------
+    %% PHASE 2: RESIDENT ONBOARDING
+    %% ----------------------------------------------------
+    subgraph P2["PHASE 2: Resident (Customer) Onboarding"]
+        direction TB
+        STEP6["<b>6. Register Resident / Customer</b><br/>• Name: John Doe | Phone: +91 98765 43210<br/>• Role: Owner | Move-in Date: 2026-10-01<br/>• Flat Status switches from 'Vacant' to 'Occupied'"]
+        STEP7["<b>7. Add Family Dependents</b><br/>• Jane Doe (Spouse, 32)<br/>• Leo Doe (Child, 6)"]
+        STEP8["<b>8. Register Vehicles</b><br/>• Car: KA-03-MG-4122 (Honda City White)<br/>• Authorized for Slot P-14 & RFID Gate Tag"]
+
+        STEP6 --> STEP7 --> STEP8
+    end
+
+    %% ----------------------------------------------------
+    %% PHASE 3: AMENITY RESERVATION & GATE PASS
+    %% ----------------------------------------------------
+    subgraph P3["PHASE 3: Amenities, Booking & Visitor Flow"]
+        direction TB
+        STEP9["<b>9. Setup Amenities Catalog</b><br/>• Clubhouse Party Hall (Capacity: 100)<br/>• Swimming Pool, Gymnasium, Tennis Court"]
+        STEP10["<b>10. Resident Books Facility</b><br/>• Unit A-204 reserves Clubhouse<br/>• Date: 2026-10-12 | Time: 18:00 - 22:00"]
+        STEP11["<b>11. Front Gate Visitor Arrives</b><br/>• Guest vehicle KA-05-AB-1234 at main gate<br/>• Visiting Flat A-204 for Birthday Event"]
+        STEP12["<b>12. Gate Pass & Check-In</b><br/>• Guard enters phone & generates pass<br/>• Resident approves -> Check-In logged"]
+        STEP13["<b>13. Guest Stay on Campus</b><br/>• Visitor attends event in Clubhouse / Flat"]
+        STEP14["<b>14. Gate Check-Out</b><br/>• Vehicle leaves campus through Tower B Gate<br/>• Security logs Exit Timestamp in SQLite"]
+
+        STEP9 --> STEP10 --> STEP11 --> STEP12 --> STEP13 --> STEP14
+    end
+
+    %% ----------------------------------------------------
+    %% PHASE 4: MONTHLY BILLING & PAYMENT
+    %% ----------------------------------------------------
+    subgraph P4["PHASE 4: Monthly Billing & Payment Settlement"]
+        direction TB
+        STEP15["<b>15. Configure Billing Categories</b><br/>• Base Maintenance, Water, DG Power, Sinking Fund"]
+        STEP16["<b>16. Generate Monthly Invoices</b><br/>• Cycle: October 2026 (All 48 units)<br/>• Unit A-204 Invoice created (Status: UNPAID)"]
+        STEP17["<b>17. Itemize Line Items Breakdown</b><br/>• Monthly Base Maintenance: Rs. 2,500<br/>• Clubhouse Event Surcharge: Rs. 400<br/>• Sinking Fund: Rs. 200<br/>• Total Payable: Rs. 3,100 (Due in 15 days)"]
+        STEP18["<b>18. Resident Makes Payment</b><br/>• John Doe pays Rs. 3,100 via UPI (UPI-982314)<br/>• Alternatively pays via Cash / Cheque at society office"]
+        STEP19["<b>19. Record Payment & Settle Invoice</b><br/>• Invoice status flips from UNPAID to PAID<br/>• Pending Dues drop to Rs. 0<br/>• Digital Receipt generated & shared"]
+
+        STEP15 --> STEP16 --> STEP17 --> STEP18 --> STEP19
+    end
+
+    %% ----------------------------------------------------
+    %% PHASE 5: OPEX, VENDORS & HELPDESK
+    %% ----------------------------------------------------
+    subgraph P5["PHASE 5: Maintenance Tickets, Vendors & OPEX"]
+        direction TB
+        STEP20["<b>20. Resident Reports Complaint</b><br/>• Flat A-204 logs: 'Kitchen pipe leak'<br/>• Priority: Urgent | Status: Open"]
+        STEP21["<b>21. Dispatch Vendor / Staff</b><br/>• Plumber from 'Express Plumbing Agency' dispatched<br/>• Work log notes recorded in Ticket Comments"]
+        STEP22["<b>22. Work Resolved & Ticket Closed</b><br/>• Pipe washer replaced | Leak stopped<br/>• Status marked RESOLVED"]
+        STEP23["<b>23. Vendor Payout & Society Expense</b><br/>• Vendor payment voucher: Rs. 850<br/>• Expense categorized under 'Repairs & Maintenance'"]
+
+        STEP20 --> STEP21 --> STEP22 --> STEP23
+    end
+
+    %% ----------------------------------------------------
+    %% PHASE 6: EXECUTIVE TELEMETRY & BACKUP
+    %% ----------------------------------------------------
+    subgraph P6["PHASE 6: Executive Telemetry & Snapshot Vault"]
+        direction TB
+        STEP24["<b>24. Live Executive Telemetry</b><br/>• Collections Inflow (+) minus OPEX Outflow (-)<br/>• Live Recovery Rate: 98% Collected<br/>• Net Society Reserve Surplus updated"]
+        STEP25["<b>25. Offline Encrypted SQLite Snapshot</b><br/>• All 32 tables saved in on-device database<br/>• Exportable to encrypted backup (.db / JSON)"]
+
+        STEP24 --> STEP25
+    end
+
+    %% Inter-Phase Transitions
+    STEP5 ==>|"Physical unit ready for tenant"| STEP6
+    STEP8 ==>|"Occupant active on campus"| STEP9
+    STEP14 ==>|"End of month cycle triggered"| STEP15
+    STEP19 ==>|"Society generates maintenance surplus"| STEP20
+    STEP23 ==>|"All revenues and costs consolidated"| STEP24
+    STEP25 ==> FINISH([🏆 END: 100% Offline Gated Society Running Smoothly])
+
+    %% Styling
+    classDef stepNode fill:#ffffff,stroke:#0f766e,stroke-width:2px,color:#131b2e;
+    classDef startEnd fill:#005c55,stroke:#00201d,stroke-width:2px,color:#ffffff;
+    class START,FINISH startEnd;
+    class STEP1,STEP2,STEP3,STEP4,STEP5,STEP6,STEP7,STEP8,STEP9,STEP10,STEP11,STEP12,STEP13,STEP14,STEP15,STEP16,STEP17,STEP18,STEP19,STEP20,STEP21,STEP22,STEP23,STEP24,STEP25 stepNode;
+```
+
+---
+
+### Step-by-Step Transition Guide for the Top-to-Bottom Flow
+
+1. **Step 1 to Step 5 (Brick to Door)**: 
+   You first define the legal society (`Community`), add physical towers (`Buildings`), auto-generate vertical tiers (`Floors`), partition into living spaces (`Apartments`), and allocate vehicle bays (`Parking Slots`).
+2. **Step 6 to Step 8 (Living Campus)**: 
+   Once a flat is created, onboarding a `Resident` flips its state to **Occupied**. Linking their `Family Members` and `Vehicles` guarantees gate recognition and parking enforcement.
+3. **Step 9 to Step 14 (Daily Operations & Access)**: 
+   Residents can reserve shared facilities (`Amenities` & `Facility Bookings`). External guests arrive at the front gate, receive verified `Visitor Passes`, complete **Check-In**, stay on campus, and record their **Check-Out** upon departure.
+4. **Step 15 to Step 19 (Revenue & Settlement)**: 
+   Every month, the automated billing engine issues `Maintenance Bills` categorized with transparent `Bill Items`. Upon payment, a `Payment` receipt is logged and the invoice transitions to **PAID**.
+5. **Step 20 to Step 23 (Care & Upkeep)**: 
+   Resident maintenance tickets (`Complaints`) dispatch vetted `Vendors` or `Staff`. Once work is certified, `Vendor Payments` record society `Expenses`.
+6. **Step 24 to Step 25 (Audit & Sovereignty)**: 
+   All financial and operational events update real-time telemetry gauges (Recovery %, Net Reserve) and persist securely into the on-device encrypted SQLite database.
+
+---
+
+## 5. Apartment / Building Booking Process (Multi-Building 10-Floor Scenario)
+
+This section details the practical, first-time setup and booking lifecycle for a large residential society consisting of **3 Buildings**, where each building has **10 Floors**, and specific floors host multiple families/apartments:
+
+- **Building A**: 3 families on the 1st floor (Flats `A-101`, `A-102`, `A-103`).
+- **Building B**: 3 families on the 10th floor (Flats `B-1001`, `B-1002`, `B-1003`).
+- **Building C**: 2 families on the 2nd floor (Flats `C-201`, `C-202`) and 2 families on the 5th floor (Flats `C-501`, `C-502`).
+
+---
+
+### Step-by-Step Execution Sequence
+
+When the software is installed on the device for the first time, follow this strict sequential chain:
+
+$$\text{1. Buildings (A, B, C)} \longrightarrow \text{2. Floors (1..10 each)} \longrightarrow \text{3. Apartments on Specific Floors} \longrightarrow \text{4. Families / Residents} \longrightarrow \text{5. House Booking \& Move-In}$$
+
+```mermaid
+flowchart TD
+    INSTALL([📱 First-Time Software Installation & Master PIN Setup]) --> STEP_BLDG
+
+    %% -----------------------------------------------------------
+    %% STAGE 1: CREATE 3 BUILDINGS
+    %% -----------------------------------------------------------
+    subgraph STG1["STEP 1: Create the 3 Buildings (Towers)"]
+        direction TB
+        STEP_BLDG["<b>Modules → Buildings → Add (+)</b><br/>Create the 3 core residential towers:"]
+        BLDG_A["<b>Building A</b><br/>• Name: Tower A<br/>• Total Floors: 10<br/>• Total Apartments: 30"]
+        BLDG_B["<b>Building B</b><br/>• Name: Tower B<br/>• Total Floors: 10<br/>• Total Apartments: 30"]
+        BLDG_C["<b>Building C</b><br/>• Name: Tower C<br/>• Total Floors: 10<br/>• Total Apartments: 30"]
+
+        STEP_BLDG --> BLDG_A
+        STEP_BLDG --> BLDG_B
+        STEP_BLDG --> BLDG_C
+    end
+
+    %% -----------------------------------------------------------
+    %% STAGE 2: CONFIGURE 10 FLOORS PER BUILDING
+    %% -----------------------------------------------------------
+    subgraph STG2["STEP 2: Configure 10 Floors for Each Building"]
+        direction TB
+        FLR_GEN["<b>Automatic & Manual Floor Configuration</b><br/>System auto-provisions Floors 1 to 10 for each tower.<br/>Manageable via <i>Buildings → Layers icon</i> or <i>Floors Screen</i>."]
+        FLR_A["<b>Building A Floors</b><br/>• Floor 1 (Target floor for 3 families)<br/>• Floors 2 to 10"]
+        FLR_B["<b>Building B Floors</b><br/>• Floors 1 to 9<br/>• Floor 10 (Target floor for 3 families)"]
+        FLR_C["<b>Building C Floors</b><br/>• Floor 1<br/>• Floor 2 (Target floor for 2 families)<br/>• Floors 3 to 4<br/>• Floor 5 (Target floor for 2 families)<br/>• Floors 6 to 10"]
+
+        FLR_GEN --> FLR_A
+        FLR_GEN --> FLR_B
+        FLR_GEN --> FLR_C
+    end
+
+    BLDG_A --> FLR_A
+    BLDG_B --> FLR_B
+    BLDG_C --> FLR_C
+
+    %% -----------------------------------------------------------
+    %% STAGE 3: CREATE APARTMENTS / FLATS ON TARGET FLOORS
+    %% -----------------------------------------------------------
+    subgraph STG3["STEP 3: Create Apartments on Target Floors"]
+        direction TB
+        APT_INTRO["<b>Modules → Apartments → Add (+)</b><br/>Link each unit to its specific Building and Floor:"]
+        
+        subgraph APTS_A["Building A (Floor 1: 3 Units)"]
+            A101["Flat A-101 (2BHK, 1200 sqft)<br/>Status: Vacant"]
+            A102["Flat A-102 (2BHK, 1200 sqft)<br/>Status: Vacant"]
+            A103["Flat A-103 (3BHK, 1500 sqft)<br/>Status: Vacant"]
+        end
+
+        subgraph APTS_B["Building B (Floor 10: 3 Units)"]
+            B1001["Flat B-1001 (3BHK, 1600 sqft)<br/>Status: Vacant"]
+            B1002["Flat B-1002 (3BHK, 1600 sqft)<br/>Status: Vacant"]
+            B1003["Flat B-1003 (Penthouse, 2400 sqft)<br/>Status: Vacant"]
+        end
+
+        subgraph APTS_C["Building C (Floor 2: 2 Units & Floor 5: 2 Units)"]
+            C201["Flat C-201 (Floor 2, 2BHK)<br/>Status: Vacant"]
+            C202["Flat C-202 (Floor 2, 2BHK)<br/>Status: Vacant"]
+            C501["Flat C-501 (Floor 5, 3BHK)<br/>Status: Vacant"]
+            C502["Flat C-502 (Floor 5, 3BHK)<br/>Status: Vacant"]
+        end
+
+        APT_INTRO --> APTS_A
+        APT_INTRO --> APTS_B
+        APT_INTRO --> APTS_C
+    end
+
+    FLR_A --> APTS_A
+    FLR_B --> APTS_B
+    FLR_C --> APTS_C
+
+    %% -----------------------------------------------------------
+    %% STAGE 4: HOUSE / APARTMENT BOOKING PROCESS
+    %% -----------------------------------------------------------
+    subgraph STG4["STEP 4 & 5: House Booking & Family Onboarding"]
+        direction TB
+        BOOK_FLOW["<b>House / Apartment Booking Lifecycle</b><br/>Customer selects available flat → verifies agreement → confirms move-in:"]
+        
+        B_ACT1["<b>1. Customer Selects Flat</b><br/>• Prospective owner/tenant selects vacant unit<br/>• e.g., Flat A-101 or Flat B-1003"]
+        B_ACT2["<b>2. Booking Verification & Security Deposit</b><br/>• Record tenant/owner details, phone, email<br/>• Enter advance token / security deposit in Payments<br/>• Flat status transitions: <i>Vacant → Booked</i>"]
+        B_ACT3["<b>3. Resident & Family Onboarding</b><br/>• Register Resident Head in <b>Residents</b> module<br/>• Add Family Members in <b>Family</b> module<br/>• Register resident cars/bikes in <b>Vehicles</b> module"]
+        B_ACT4["<b>4. Final Move-In & Parking Allotment</b><br/>• Allot parking bay (e.g., Slot P-01 for Flat A-101)<br/>• Flat status transitions: <i>Booked → Occupied</i><br/>• Gate pass and RFID activated for family vehicles"]
+
+        BOOK_FLOW --> B_ACT1 --> B_ACT2 --> B_ACT3 --> B_ACT4
+    end
+
+    APTS_A & APTS_B & APTS_C --> BOOK_FLOW
+
+    %% -----------------------------------------------------------
+    %% FINAL STATE
+    %% -----------------------------------------------------------
+    SUCCESS([🎉 Fully Configured: 3 Buildings • 10 Floors • Families Settled & Active])
+    B_ACT4 --> SUCCESS
+
+    %% Styling
+    classDef mainNode fill:#ffffff,stroke:#0f766e,stroke-width:2px,color:#131b2e;
+    classDef startEnd fill:#005c55,stroke:#00201d,stroke-width:2px,color:#ffffff;
+    class INSTALL,SUCCESS startEnd;
+    class STEP_BLDG,BLDG_A,BLDG_B,BLDG_C,FLR_GEN,FLR_A,FLR_B,FLR_C,APT_INTRO,A101,A102,A103,B1001,B1002,B1003,C201,C202,C501,C502,BOOK_FLOW,B_ACT1,B_ACT2,B_ACT3,B_ACT4 mainNode;
+```
+
+---
+
+### Detailed Society Structural Mapping Matrix
+
+| Building | Floor Level | Apartment / Flat # | Flat Configuration | Family / Resident Head | Family Members | Assigned Parking | House Booking Status |
+|:---|:---|:---|:---|:---|:---:|:---:|:---:|
+| **Building A** | **Floor 1** | **A-101** | 2BHK (1,200 sqft) | Sharma Family (*Rajesh Sharma*) | 4 Members | Slot P-A01 | **Occupied** *(Booked & Moved In)* |
+| **Building A** | **Floor 1** | **A-102** | 2BHK (1,200 sqft) | Patel Family (*Amit Patel*) | 3 Members | Slot P-A02 | **Occupied** *(Booked & Moved In)* |
+| **Building A** | **Floor 1** | **A-103** | 3BHK (1,500 sqft) | Verma Family (*Suresh Verma*) | 5 Members | Slot P-A03 | **Occupied** *(Booked & Moved In)* |
+| **Building A** | Floors 2–10 | *Available Units* | 1BHK, 2BHK, 3BHK | *Unassigned* | — | *Open Pool* | **Vacant** *(Available for Booking)* |
+| **Building B** | Floors 1–9 | *Available Units* | 2BHK, 3BHK | *Unassigned* | — | *Open Pool* | **Vacant** *(Available for Booking)* |
+| **Building B** | **Floor 10** | **B-1001** | 3BHK (1,600 sqft) | Mehta Family (*Karan Mehta*) | 4 Members | Slot P-B10 | **Occupied** *(Booked & Moved In)* |
+| **Building B** | **Floor 10** | **B-1002** | 3BHK (1,600 sqft) | Kapoor Family (*Rohan Kapoor*) | 3 Members | Slot P-B11 | **Occupied** *(Booked & Moved In)* |
+| **Building B** | **Floor 10** | **B-1003** | Penthouse (2,400 sqft) | Singhania Family (*Vikram Singhania*) | 4 Members | Slot P-B12 | **Occupied** *(Booked & Moved In)* |
+| **Building C** | Floor 1 | *Available Units* | 2BHK | *Unassigned* | — | *Open Pool* | **Vacant** *(Available for Booking)* |
+| **Building C** | **Floor 2** | **C-201** | 2BHK (1,150 sqft) | Iyer Family (*Venkatesh Iyer*) | 3 Members | Slot P-C03 | **Occupied** *(Booked & Moved In)* |
+| **Building C** | **Floor 2** | **C-202** | 2BHK (1,150 sqft) | Nair Family (*Pradeep Nair*) | 2 Members | Slot P-C04 | **Occupied** *(Booked & Moved In)* |
+| **Building C** | Floors 3–4 | *Available Units* | 2BHK, 3BHK | *Unassigned* | — | *Open Pool* | **Vacant** *(Available for Booking)* |
+| **Building C** | **Floor 5** | **C-501** | 3BHK (1,450 sqft) | Reddy Family (*Anand Reddy*) | 4 Members | Slot P-C09 | **Occupied** *(Booked & Moved In)* |
+| **Building C** | **Floor 5** | **C-502** | 3BHK (1,450 sqft) | Das Family (*Subhash Das*) | 3 Members | Slot P-C10 | **Occupied** *(Booked & Moved In)* |
+| **Building C** | Floors 6–10 | *Available Units* | 3BHK | *Unassigned* | — | *Open Pool* | **Vacant** *(Available for Booking)* |
+
+---
+
+### Step-by-Step Implementation in the App
+
+1. **Step 1: Create the 3 Buildings**
+   - Open **Modules** → tap **Buildings** → tap **+ (Add)**.
+   - Enter **Building Name**: `Building A` (or `Tower A`), set **Total Floors**: `10`, **Total Apartments**: `30` → tap **Save**.
+   - Repeat the same for `Building B` and `Building C`.
+2. **Step 2: Confirm Floors Generation**
+   - In **Modules** → **Buildings**, tap the **Layers icon** (`layers_outlined`) on each building or tap **All Floors**.
+   - The app has automatically generated Floors 1 to 10 for each of the 3 buildings.
+3. **Step 3: Add Apartments on Specific Floors**
+   - Open **Modules** → tap **Apartments** → tap **+ (Add)**.
+   - For Building A: Select **Building A** → select **Floor 1** → add Flat `A-101` (2BHK), `A-102` (2BHK), `A-103` (3BHK).
+   - For Building B: Select **Building B** → select **Floor 10** → add Flat `B-1001` (3BHK), `B-1002` (3BHK), `B-1003` (Penthouse).
+   - For Building C: Select **Building C** → select **Floor 2** → add Flat `C-201`, `C-202`; then select **Floor 5** → add Flat `C-501`, `C-502`.
+4. **Step 4 & 5: Book the House & Onboard the Families**
+   - When a family books a flat (e.g. *Rajesh Sharma* books *A-101*):
+   - Go to **Modules** → **Residents** → tap **+ (Add)**.
+   - Select Apartment `A-101`, enter name *Rajesh Sharma*, phone, and role (*Owner*).
+   - Once saved, flat `A-101` automatically transitions from **Vacant** to **Occupied**.
+   - Go to **Modules** → **Family** to add spouse/children.
+   - Go to **Modules** → **Vehicles** to register cars for gate security & parking bay allotment.
+
+
